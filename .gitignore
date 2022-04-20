@@ -1,4 +1,5 @@
 *
 !*.cpp
 !*.h
-!*.jpg
+!img
+!lena.jpg
