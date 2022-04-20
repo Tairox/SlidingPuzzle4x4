@@ -1,3 +1,5 @@
+#include<filesystem> // pour itiliser la fct preferred_separator qui permet le closs platform Linux/Windows
+#include<string>
 #include <SFML/Graphics.hpp>
 int main()
 {
@@ -8,7 +10,10 @@ int main()
     sf::Texture t;
     sf::Sprite s; 
 
-    if(!t.loadFromFile("img/lena.jpg")) // la texture t a chargé l'image
+    if(!t.loadFromFile(std::string("img") + std::filesystem::path::preferred_separator + std::string("lena.jpg")))
+    /* la texture t a chargé l'image
+    on utilise une concaténation de string afin d'écrire "img/lena.png" si on compile sur Linux/Unix
+    mais img\lena.lpng si on compile sur Windows*/
     {
         //error
     }
