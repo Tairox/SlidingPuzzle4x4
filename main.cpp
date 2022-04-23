@@ -12,7 +12,7 @@ int main()
 
     if(!t.loadFromFile("img/lena.jpg")) //la texture t a chargé l'image
     {
-        //message d'erreur si image introuvable
+        //message d'erreur si l'image est introuvable
     }
 
     s.setTexture(t); // le sprite contient la texture t
