@@ -1,9 +1,11 @@
 #include <SFML/Graphics.hpp>
+#include"fct.h"
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "SFML works!");
     sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+    //shape.setFillColor(sf::Color::Green);
+    couleurcercle(shape);
 
     sf::Texture t;
     sf::Sprite s; 
