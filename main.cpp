@@ -4,8 +4,14 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "SFML works!");
     sf::CircleShape shape(100.f);
+<<<<<<< HEAD
     //shape.setFillColor(sf::Color::Green);
     couleurcercle(shape);
+=======
+    shape.setFillColor(sf::Color::Green);
+    int a=3;
+    a++;
+>>>>>>> a8f41653066407c2e404b81cc1cef59e21ca2f16
 
     sf::Texture t;
     sf::Sprite s; 
