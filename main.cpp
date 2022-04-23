@@ -4,7 +4,7 @@ int main()
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "SFML works!");
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
-    int a=1;
+    int a=2;
     a++;
 
     sf::Texture t;
