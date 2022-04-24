@@ -10,8 +10,15 @@ using namespace sf;
 int main()
 {
     //Window
-    RenderWindow window_menu(VideoMode(1920, 1080), "Sliding Puzzle", Style::Fullscreen);
+    RenderWindow window_menu(VideoMode(1920, 1080), "Sliding Puzzle", Style::Default);
     Event ev; //Contains the event the user has done in the window
+	
+	Image icon;
+	if(!icon.loadFromFile("img/icon.png"))
+	{
+		std::cout<<"Could not load icon"<<std::endl;
+	}
+	window_menu.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr()); //permet de définir l'icône de la fenêtre à partir d'un sf::Image
 
 	Texture bg_texture;
 	if(!bg_texture.loadFromFile("img/background.jpg"))

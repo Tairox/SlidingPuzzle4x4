@@ -2,7 +2,7 @@
 !*.cpp
 !*.h
 !img
-!lena.jpg
-!background.jpg
+!*.jpg
+!*.png
 !font
 !*.ttf
