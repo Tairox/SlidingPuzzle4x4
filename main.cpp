@@ -10,16 +10,22 @@ using namespace sf;
 int main()
 {
     //Window
-    RenderWindow window(VideoMode(1920, 1080), "Sliding Puzzle", Style::Titlebar | Style::Close | Style::Resize);
+    RenderWindow window_menu(VideoMode(1920, 1080), "Sliding Puzzle", Style::Fullscreen);
     Event ev; //Contains the event the user has done in the window
 
+	Texture bg_texture;
+	if(!bg_texture.loadFromFile("img/background.jpg"))
+	{
+		std::cout<<"Could not load background texture"<<std::endl;
+	}
+	Sprite bg_sprite(bg_texture);
 
-    Menu menu(window.getSize().x, window.getSize().y);
+    Menu menu(window_menu.getSize().x, window_menu.getSize().y);
     
     //Game loop
-    while(window.isOpen())
+    while(window_menu.isOpen())
     {
-        while (window.pollEvent(ev))
+        while (window_menu.pollEvent(ev))
 		{
 			switch (ev.type)
 			{
@@ -44,7 +50,7 @@ int main()
 						std::cout << "Option button has been pressed" << std::endl;
 						break;
 					case 2:
-						window.close();
+						window_menu.close();
 						break;
 					}
 					break;
@@ -52,7 +58,7 @@ int main()
 				break;
 
 			case sf::Event::Closed:
-				window.close();
+				window_menu.close();
 				break;
 
 			}
@@ -62,13 +68,14 @@ int main()
 
         //Render
 
-        window.clear(Color::Black);
+        window_menu.clear(Color::Black);
 
         //Drawing of the game
+		
+		window_menu.draw(bg_sprite);
+        menu.Draw(window_menu);
 
-        menu.Draw(window);
-
-        window.display(); //Tells app window is done drawing
+        window_menu.display(); //Tells app window is done drawing
     }
 
     //End of application
