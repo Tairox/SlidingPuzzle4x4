@@ -3,27 +3,27 @@
 
 Menu::Menu(int width, int height)
 {
-	if (!_font.loadFromFile("arial.ttf"))
+	if (!font_.loadFromFile("arial.ttf"))
 	{
 		// handle error
 	}
 
-	_text[0].setFont(_font);
-	_text[0].setColor(sf::Color::Red);
-	_text[0].setString("Play");
-	_text[0].setPosition(sf::Vector2f(width / 2, height / (3 + 1) * 1));
+	text_[0].setFont(font_);
+	text_[0].setColor(sf::Color::Red);
+	text_[0].setString("Play");
+	text_[0].setPosition(sf::Vector2f(width / 2, height / (3 + 1) * 1));
 
-	_text[1].setFont(_font);
-	_text[1].setColor(sf::Color::White);
-	_text[1].setString("New Game");
-	_text[1].setPosition(sf::Vector2f(width / 2, height / (3 + 1) * 2));
+	text_[1].setFont(font_);
+	text_[1].setColor(sf::Color::White);
+	text_[1].setString("New Game");
+	text_[1].setPosition(sf::Vector2f(width / 2, height / (3 + 1) * 2));
 
-	_text[2].setFont(_font);
-	_text[2].setColor(sf::Color::White);
-	_text[2].setString("Exit");
-	_text[2].setPosition(sf::Vector2f(width / 2, height / (3 + 1) * 3));
+	text_[2].setFont(font_);
+	text_[2].setColor(sf::Color::White);
+	text_[2].setString("Exit");
+	text_[2].setPosition(sf::Vector2f(width / 2, height / (3 + 1) * 3));
 
-	_selectedIndex = 0;
+	selectedIndex_ = 0;
 }
 
 Menu::~Menu()
@@ -33,21 +33,21 @@ Menu::~Menu()
 
 void Menu::MoveUp()
 {
-	if (_selectedIndex - 1 >= 0) //If we are under 0 we have to MoveDown.
+	if (selectedIndex_ - 1 >= 0) //If we are under 0 we have to MoveDown.
 	{
-		_text[_selectedIndex].setColor(Color::White);
-		_selectedIndex--;
-		_text[_selectedIndex].setColor(Color::Red);
+		text_[selectedIndex_].setColor(Color::White);
+		selectedIndex_--;
+		text_[selectedIndex_].setColor(Color::Red);
 	}
 }
 
 void Menu::MoveDown() 
 {
-	if (_selectedIndex + 1 < 3) //If we are above 3 we have to MoveUP.
+	if (selectedIndex_ + 1 < 3) //If we are above 3 we have to MoveUP.
 	{
-		_text[_selectedIndex].setColor(sf::Color::White);
-		_selectedIndex++;
-		_text[_selectedIndex].setColor(sf::Color::Red);
+		text_[selectedIndex_].setColor(sf::Color::White);
+		selectedIndex_++;
+		text_[selectedIndex_].setColor(sf::Color::Red);
 	}
 }
 
@@ -55,6 +55,6 @@ void Menu::Draw(sf::RenderWindow &window)
 {
 	for (int i = 0; i < 3; i++)
 	{
-		window.draw(_text[i]);
+		window.draw(text_[i]);
 	}
 }

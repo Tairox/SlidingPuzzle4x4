@@ -1,35 +1,76 @@
 #include <SFML/Graphics.hpp>
+using namespace sf;
+
+#include <iostream>
+
 #include"fct.h"
+#include "menu.h"
+
+
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(1920, 1080), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Blue);
-    couleurcercle(shape);
+    //Window
+    RenderWindow window(VideoMode(1920, 1080), "Sliding Puzzle", Style::Titlebar | Style::Close | Style::Resize);
+    Event ev; //Contains the event the user has done in the window
 
-    sf::Texture t;
-    sf::Sprite s; 
 
-    if(!t.loadFromFile("img/lena.jpg")) //la texture t a chargé l'image
+    Menu menu(window.getSize().x, window.getSize().y);
+    
+    //Game loop
+    while(window.isOpen())
     {
-        //message d'erreur si l'image est introuvable
+        while (window.pollEvent(ev))
+		{
+			switch (ev.type)
+			{
+			case Event::KeyReleased:
+				switch (ev.key.code)
+				{
+				case Keyboard::Up:
+					menu.MoveUp();
+					break;
+
+				case Keyboard::Down:
+					menu.MoveDown();
+					break;
+
+				case Keyboard::Enter:
+					switch (menu.GetPressedItem())
+					{
+					case 0:
+						std::cout << "Play button has been pressed" << std::endl;
+						break;
+					case 1:
+						std::cout << "Option button has been pressed" << std::endl;
+						break;
+					case 2:
+						window.close();
+						break;
+					}
+					break;
+				}
+				break;
+
+			case sf::Event::Closed:
+				window.close();
+				break;
+
+			}
+		}
+
+        //Update
+
+        //Render
+
+        window.clear(Color::Black);
+
+        //Drawing of the game
+
+        menu.Draw(window);
+
+        window.display(); //Tells app window is done drawing
     }
 
-    s.setTexture(t); // le sprite contient la texture t
-
-    while (window.isOpen())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-        window.clear();
-        window.draw(s);
-        window.draw(shape);
-        shape.setPosition(sf::Vector2f(1500,200));
-        window.display();
-    }
+    //End of application
     return 0;
 }

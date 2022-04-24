@@ -6,9 +6,9 @@ using namespace sf;
 
 class Menu
 {
-    Font _font;
-    Text _text[3];
-    int _selectedIndex;
+    Font font_;
+    Text text_[3];
+    int selectedIndex_;
 
     public:
     Menu(int,int);
@@ -16,6 +16,7 @@ class Menu
     void MoveUp();
     void MoveDown();
     void Draw(RenderWindow &);
+    int GetPressedItem() { return selectedIndex_; }
 
 };
 
