@@ -7,7 +7,7 @@ using namespace sf;
 class Menu
 {
     Font _font;
-    Text _menu[3];
+    Text _text[3];
     int _selectedIndex;
 
     public:
