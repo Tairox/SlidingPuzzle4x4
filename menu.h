@@ -4,6 +4,8 @@
 #include <SFML/Graphics.hpp>
 using namespace sf;
 
+#include <iostream>
+
 class Menu
 {
     Font font_;

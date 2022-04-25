@@ -13,19 +13,19 @@ Menu::Menu(int width, int height)
 	text_[0].setString("Play");
 	text_[0].setCharacterSize(150);
 	text_[0].setStyle(sf::Text::Bold | sf::Text::Underlined);
-	text_[0].setPosition(sf::Vector2f(width / 2, height / (3 + 1) * 1));
+	text_[0].setPosition(sf::Vector2f((width / 2) - (text_[0].getLocalBounds().width /2), height / (3 + 1) * 1));
 
 	text_[1].setFont(font_);
 	text_[1].setColor(sf::Color::White);
 	text_[1].setString("New Game");
 	text_[1].setCharacterSize(100);
-	text_[1].setPosition(sf::Vector2f(width / 2, height / (3 + 1) * 2));
+	text_[1].setPosition(sf::Vector2f((width / 2) - (text_[1].getLocalBounds().width /2), height / (3 + 1) * 2));
 
 	text_[2].setFont(font_);
 	text_[2].setColor(sf::Color::White);
 	text_[2].setString("Exit");
 	text_[2].setCharacterSize(100);
-	text_[2].setPosition(sf::Vector2f(width / 2, height / (3 + 1) * 3));
+	text_[2].setPosition(sf::Vector2f((width / 2) - (text_[2].getLocalBounds().width /2), height / (3 + 1) * 3));
 
 	selectedIndex_ = 0;
 }

@@ -11,6 +11,7 @@ int main()
 {
     //Window
     RenderWindow window_menu(VideoMode(1920, 1080), "Sliding Puzzle", Style::Default);
+	window_menu.setFramerateLimit(60);
     Event ev; //Contains the event the user has done in the window
 	
 	Image icon;
@@ -28,6 +29,22 @@ int main()
 	Sprite bg_sprite(bg_texture);
 
     Menu menu(window_menu.getSize().x, window_menu.getSize().y);
+
+	//Title
+	Text title;
+	Font font;
+	Vector2f titlePosition(0,0);
+	if (!font.loadFromFile("font/Walk-Around-the-Block.ttf"))
+	{
+		// handle error
+	}
+	title.setFont(font);
+	title.setColor(sf::Color::Red);
+	title.setString("Sliding Puzzle");
+	title.setCharacterSize(150);
+	title.setPosition(titlePosition);
+
+	float xVelocity = 3;
     
     //Game loop
     while(window_menu.isOpen())
@@ -46,7 +63,9 @@ int main()
 				case Keyboard::Down:
 					menu.MoveDown();
 					break;
-
+				case Keyboard::Escape:
+					window_menu.close();
+					break;
 				case Keyboard::Enter:
 					switch (menu.GetPressedItem())
 					{
@@ -71,6 +90,14 @@ int main()
 			}
 		}
 
+		//Physics
+		if(titlePosition.x <0 || titlePosition.x > window_menu.getSize().x - title.getLocalBounds().width)
+		{
+			xVelocity *= -1;
+		}
+		titlePosition.x += xVelocity;
+		title.setPosition(titlePosition);
+
         //Update
 
         //Render
@@ -78,8 +105,8 @@ int main()
         window_menu.clear(Color::Black);
 
         //Drawing of the game
-		
 		window_menu.draw(bg_sprite);
+		window_menu.draw(title);
         menu.Draw(window_menu);
 
         window_menu.display(); //Tells app window is done drawing
