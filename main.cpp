@@ -3,7 +3,6 @@ using namespace sf;
 
 #include <iostream>
 
-#include"fct.h"
 #include "menu.h"
 
 
