@@ -3,12 +3,28 @@ using namespace sf;
 
 #include <iostream>
 
-#include "menu.h"
+//#include "menu.h"
+
+#include "mainmenu.h"
 
 
 int main()
 {
-    //Window
+	RenderWindow window(VideoMode(1920, 1080), "Sliding Puzzle", Style::Default);
+	window.setFramerateLimit(60);
+
+	MainMenu mainmenu(window);
+	mainmenu.Init();
+
+
+	while(window.isOpen())
+    {
+		mainmenu.ProcessInput();
+		mainmenu.Update();
+		mainmenu.Draw();
+	}
+
+    /*//Window
     RenderWindow window_menu(VideoMode(1920, 1080), "Sliding Puzzle", Style::Default);
 	window_menu.setFramerateLimit(60);
     Event ev; //Contains the event the user has done in the window
@@ -111,6 +127,6 @@ int main()
         window_menu.display(); //Tells app window is done drawing
     }
 
-    //End of application
+    //End of application*/
     return 0;
 }
