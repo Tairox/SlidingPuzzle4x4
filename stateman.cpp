@@ -1,15 +1,15 @@
 #include "stateman.h"
 
-Engine::StateMan::StateMan() : m_add(false), m_replace(false), m_remove(false) //Liste d'initialisation : permet d'initialiser les composantes de la classe
+StateMan::StateMan() : m_add(false), m_replace(false), m_remove(false) //Liste d'initialisation : permet d'initialiser les composantes de la classe
 {
     //Donc rien à faire ici
 }
 
-Engine::StateMan::~StateMan()
+StateMan::~StateMan()
 {
 }
 
-void Engine::StateMan::Add(std::unique_ptr<State> toAdd, bool replace)
+void StateMan::Add(std::unique_ptr<State> toAdd, bool replace)
 {
     m_add = true;
     m_newState = std::move(toAdd);
@@ -17,12 +17,12 @@ void Engine::StateMan::Add(std::unique_ptr<State> toAdd, bool replace)
     m_replace = replace;
 }
 
-void Engine::StateMan::PopCurrent()
+void StateMan::PopCurrent()
 {
     m_remove = true;
 }
 
-void Engine::StateMan::ProcessStateChange()
+void StateMan::ProcessStateChange()
 {
     if(m_remove && (!m_stateStack.empty()))
     {
@@ -56,7 +56,7 @@ void Engine::StateMan::ProcessStateChange()
     }
 }
 
-std::unique_ptr<Engine::State> &Engine::StateMan::GetCurrent()
+std::unique_ptr<State> &StateMan::GetCurrent()
 {
     return m_stateStack.top();
 }
