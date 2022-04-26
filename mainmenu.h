@@ -23,7 +23,6 @@ private:
     bool isExitButtonPressed_ = false;
     bool isPlayButtonPressed_ = false;;
     bool isNewGameButtonPressed_ = false;
-    bool isInMenu_=true;// car initialement on est dans le menu
 
     RenderWindow & rw_;
 
@@ -34,6 +33,7 @@ public:
     void ProcessInput() override;
     void Update() override;
     void Draw() override;
+    bool isInMenu();
 };
 
 #endif

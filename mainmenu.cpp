@@ -132,32 +132,27 @@ void MainMenu::Update()
 
     if(isNewGameButtonPressed_)
     {
-        isInMenu_=false;// quand on clique on sort du menu
-        
-
+        //rien
     }
 }
 
 void MainMenu::Draw()
 {
-    if(isInMenu_==true)//on dessine le menu
+    rw_.clear(Color::Black);
+    rw_.draw(bg_sprite_);
+    rw_.draw(title_);
+    for (int i = 0; i < 3; i++)
     {
-        rw_.clear(Color::Black);
-
-	    rw_.draw(bg_sprite_);
-	    rw_.draw(title_);
-        for (int i = 0; i < 3; i++)
-	    {
-	    	rw_.draw(text_[i]);
-	    }
-        rw_.display(); //Tells app window is done drawing
+    	rw_.draw(text_[i]);
     }
-
-    if(isInMenu_==false)//on dessine le jeu
-    {
-        rw_.clear();
-        rw_.display();
-    }
+    rw_.display(); //Tells app window is done drawing
 }
 
+bool MainMenu::isInMenu()
+{
+    if(isNewGameButtonPressed_)
+    {return false;}
+    else
+    {return true;}
+}
 
