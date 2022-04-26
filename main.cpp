@@ -7,10 +7,15 @@ using namespace sf;
 
 #include "mainmenu.h"
 
+#include "game.h"
+
 
 int main()
 {
-	RenderWindow window(VideoMode(1920, 1080), "Sliding Puzzle", Style::Default);
+	Game game;
+	game.Run();
+
+	/*RenderWindow window(VideoMode(1920, 1080), "Sliding Puzzle", Style::Default);
 	window.setFramerateLimit(60);
 
 	MainMenu mainmenu(window);
@@ -22,8 +27,10 @@ int main()
 		mainmenu.ProcessInput();
 		mainmenu.Update();
 		mainmenu.Draw();
-	}
+	}*/
 
+
+#pragma region old
     /*//Window
     RenderWindow window_menu(VideoMode(1920, 1080), "Sliding Puzzle", Style::Default);
 	window_menu.setFramerateLimit(60);
@@ -128,5 +135,7 @@ int main()
     }
 
     //End of application*/
+
+#pragma endregion
     return 0;
 }

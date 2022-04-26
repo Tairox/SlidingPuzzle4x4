@@ -46,7 +46,7 @@ void StateMan::ProcessStateChange()
             m_stateStack.top()->Pause();
         }
 
-        m_stateStack.push(std::move(m_newState));
+        m_stateStack.push(m_newState);
         m_stateStack.top()->Init();
         m_stateStack.top()->Start();
         m_add = false;
