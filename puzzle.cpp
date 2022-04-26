@@ -13,6 +13,7 @@ Puzzle::Puzzle() //création d'un taquin résolu 1,2,3,4...16 avec 16 étant la 
    }
 }
 
+//Pour les méthodes Move : gérer les cas des bords (impossible d'aller à gauche etc)
 void Puzzle::MoveUp(unsigned int x, unsigned int y) //pour faire monter la case cliquée d'un cran si la case cliquée est en dessous de la case vide
 {
     unsigned int temp=puzzle[x][y];//on prend la case cliquée
@@ -39,4 +40,51 @@ void Puzzle::MoveRight(unsigned int x, unsigned int y) //case cliquée va à dro
     unsigned int temp=puzzle[x][y];
     puzzle[x][y]=puzzle[x][y+1];
     puzzle[x][y+1]=temp;
+}
+
+int* Puzzle::GetFree()
+{
+    for(unsigned int i=0;i<4;i++)
+   {
+      for(unsigned int j=0;j<4;j++)
+      {
+        if(puzzle[i][j]==16)
+        {
+            int* pos=new int[2];
+            pos[0]=i;
+            pos[1]=j;
+            return pos;
+        }
+      }
+   }
+}
+
+void Puzzle::Shuffle()
+{
+    unsigned int i=0;
+    while (i<64)
+    {
+        int* posFree;
+        posFree=GetFree();
+        //génerer un random x [0;3]
+        unsigned int x;
+        switch (x)
+        {
+        case 0:
+           MoveUp(posFree[0]-1,posFree[1]); //on simule un clic sur la case en dessous de la case vide (ce qui fera "remonter" le chiffre et "baisser" la case vide)
+            break;
+        case 1:
+            MoveDown(posFree[0]+1,posFree[1]);
+            break;
+        case 2:
+            MoveLeft(posFree[0],posFree[1]-1);
+            break;
+        case 3:
+            MoveRight(posFree[0],posFree[1]+1);
+            break;
+        default:
+            //error
+            break;
+        }
+    }
 }
