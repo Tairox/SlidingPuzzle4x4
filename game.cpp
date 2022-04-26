@@ -1,7 +1,5 @@
 #include "game.h"
 
-
-
 Game::Game()
 {
     window_.create(VideoMode(1920, 1080), "Sliding Puzzle", Style::Default);
@@ -10,7 +8,7 @@ Game::Game()
     mainMenu_->Init();
 }
 
-void Game::Run()
+void Game::run()
 {
     while(window_.isOpen())
     {
