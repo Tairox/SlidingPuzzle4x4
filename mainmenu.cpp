@@ -15,7 +15,7 @@ void MainMenu::Init()
 	text_[0].setFont(font_);
 	text_[0].setFillColor(sf::Color::Red);
 	text_[0].setString("Play");
-	text_[0].setCharacterSize(150);
+	text_[0].setCharacterSize(100);
 	text_[0].setStyle(sf::Text::Bold | sf::Text::Underlined);
 	text_[0].setPosition(sf::Vector2f((rw_.getSize().x / 2) - (text_[0].getLocalBounds().width /2), rw_.getSize().y / (3 + 1) * 1));
 
@@ -108,11 +108,11 @@ void MainMenu::Update()
     for(unsigned int i = 0;i<3;i++)
     {
         text_[i].setFillColor(Color::White);
-		text_[i].setCharacterSize(100);
+		//text_[i].setCharacterSize(100);
 		text_[i].setStyle(Text::Regular);
     }
     text_[selectedIndex_].setFillColor(Color::Red);
-	text_[selectedIndex_].setCharacterSize(150);
+	//text_[selectedIndex_].setCharacterSize(150);
 	text_[selectedIndex_].setStyle(sf::Text::Bold | sf::Text::Underlined);
 
     //Physics
