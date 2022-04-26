@@ -1,12 +1,10 @@
 #include "mainmenu.h"
-#include "stateman.h"
 
 class Game
 {
-    MainMenu * mainMenu_; //Agrégation
-    StateMan * stateManager_; //Agrégation
+    MainMenu mainMenu_; //Composition
+    RenderWindow window;
+
 public:
-    Game();
-    ~Game();
     void Run();
 };
