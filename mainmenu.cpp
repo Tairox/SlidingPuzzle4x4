@@ -13,20 +13,20 @@ void MainMenu::Init()
 	}
 
 	text_[0].setFont(font_);
-	text_[0].setColor(sf::Color::Red);
+	text_[0].setFillColor(sf::Color::Red);
 	text_[0].setString("Play");
 	text_[0].setCharacterSize(150);
 	text_[0].setStyle(sf::Text::Bold | sf::Text::Underlined);
 	text_[0].setPosition(sf::Vector2f((rw_.getSize().x / 2) - (text_[0].getLocalBounds().width /2), rw_.getSize().y / (3 + 1) * 1));
 
 	text_[1].setFont(font_);
-	text_[1].setColor(sf::Color::White);
+	text_[1].setFillColor(sf::Color::White);
 	text_[1].setString("New Game");
 	text_[1].setCharacterSize(100);
 	text_[1].setPosition(sf::Vector2f((rw_.getSize().x / 2) - (text_[1].getLocalBounds().width /2), rw_.getSize().y / (3 + 1) * 2));
 
 	text_[2].setFont(font_);
-	text_[2].setColor(sf::Color::White);
+	text_[2].setFillColor(sf::Color::White);
 	text_[2].setString("Exit");
 	text_[2].setCharacterSize(100);
 	text_[2].setPosition(sf::Vector2f((rw_.getSize().x / 2) - (text_[2].getLocalBounds().width /2), rw_.getSize().y / (3 + 1) * 3));
@@ -38,7 +38,7 @@ void MainMenu::Init()
 		// handle error
 	}
 	title.setFont(font);
-	title.setColor(sf::Color::Red);
+	title.setFillColor(sf::Color::Red);
 	title.setString("Sliding Puzzle");
 	title.setCharacterSize(150);
     titlePosition.x = 0;
@@ -107,11 +107,11 @@ void MainMenu::Update()
 {
     for(unsigned int i = 0;i<3;i++)
     {
-        text_[i].setColor(Color::White);
+        text_[i].setFillColor(Color::White);
 		text_[i].setCharacterSize(100);
 		text_[i].setStyle(Text::Regular);
     }
-    text_[selectedIndex_].setColor(Color::Red);
+    text_[selectedIndex_].setFillColor(Color::Red);
 	text_[selectedIndex_].setCharacterSize(150);
 	text_[selectedIndex_].setStyle(sf::Text::Bold | sf::Text::Underlined);
 
@@ -128,20 +128,50 @@ void MainMenu::Update()
     {
         rw_.close();
     }
+
+    if(isNewGameButtonPressed_)
+    {
+        isInMenu=false;// quand on clique on sort du menu
+
+        /*
+        int puzzle[4][4];
+        unsigned int i=0; ce code sera fait dans une classe
+        while (i<17)
+        {
+            for(unsigned int j=0;j<4;j++)
+            {
+                for(unsigned int k=0;k<4;k++)
+                {
+                    puzzle[j][k]=i;
+                    i++;
+                }
+            }
+        }*/
+        
+
+    }
 }
 
 void MainMenu::Draw()
 {
-    rw_.clear(Color::Black);
+    if(isInMenu==true)//on dessine le menu
+    {
+        rw_.clear(Color::Black);
 
-	rw_.draw(bg_sprite);
-	rw_.draw(title);
-    for (int i = 0; i < 3; i++)
-	{
-		rw_.draw(text_[i]);
-	}
+	    rw_.draw(bg_sprite);
+	    rw_.draw(title);
+        for (int i = 0; i < 3; i++)
+	    {
+	    	rw_.draw(text_[i]);
+	    }
+        rw_.display(); //Tells app window is done drawing
+    }
 
-    rw_.display(); //Tells app window is done drawing
+    if(isInMenu==false)//on dessine le jeu
+    {
+        rw_.clear();
+        rw_.display();
+    }
 }
 
 
