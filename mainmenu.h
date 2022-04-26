@@ -23,6 +23,7 @@ private:
     bool isExitButtonPressed_ = false;
     bool isPlayButtonPressed_ = false;;
     bool isNewGameButtonPressed_ = false;
+    bool isInMenu=true;// car initialement on est dans le menu
 
     RenderWindow & rw_;
 
