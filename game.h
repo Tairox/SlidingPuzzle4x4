@@ -2,9 +2,13 @@
 
 class Game
 {
-    MainMenu mainMenu_; //Composition
-    RenderWindow window;
+    RenderWindow window_;
+    MainMenu * mainMenu_;
+
+    //MainMenu mainMenu_; //Composition
 
 public:
+    Game();
+    ~Game();
     void Run();
 };

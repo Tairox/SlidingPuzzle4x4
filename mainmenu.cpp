@@ -1,7 +1,7 @@
 #include "mainmenu.h"
 
 
-MainMenu::MainMenu(RenderWindow & rw) : rw_(rw)
+MainMenu::MainMenu(RenderWindow & rw) : rw_(rw) //L'opérateur = n'existe pas pour la classe RenderWindow, on est donc obligé d'utiliser le constructeur de copie.
 {
 }
 

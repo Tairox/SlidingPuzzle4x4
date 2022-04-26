@@ -34,7 +34,6 @@ public:
     void ProcessInput() override;
     void Update() override;
     void Draw() override;
-    RenderWindow& getRenderWindow(){return rw_;}
 };
 
 #endif
