@@ -133,21 +133,6 @@ void MainMenu::Update()
     if(isNewGameButtonPressed_)
     {
         isInMenu_=false;// quand on clique on sort du menu
-
-        /*
-        int puzzle[4][4];
-        unsigned int i=0; ce code sera fait dans une classe
-        while (i<17)
-        {
-            for(unsigned int j=0;j<4;j++)
-            {
-                for(unsigned int k=0;k<4;k++)
-                {
-                    puzzle[j][k]=i;
-                    i++;
-                }
-            }
-        }*/
         
 
     }
