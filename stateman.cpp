@@ -5,14 +5,11 @@ StateMan::StateMan() : m_add(false), m_replace(false), m_remove(false) //Liste d
     //Donc rien à faire ici
 }
 
-StateMan::~StateMan()
-{
-}
 
-void StateMan::Add(std::unique_ptr<State> toAdd, bool replace)
+void StateMan::Add(State* toAdd, bool replace)
 {
     m_add = true;
-    m_newState = std::move(toAdd);
+    m_newState = toAdd;
 
     m_replace = replace;
 }
@@ -56,7 +53,18 @@ void StateMan::ProcessStateChange()
     }
 }
 
-std::unique_ptr<State> &StateMan::GetCurrent()
+State* StateMan::GetCurrent()
 {
     return m_stateStack.top();
+}
+
+StateMan::~StateMan()
+{
+    delete m_newState;
+    for(unsigned int i = 0;i<m_stateStack.size();i++)
+    {
+        delete m_stateStack.top();
+        m_stateStack.pop();
+    }
+    
 }

@@ -10,8 +10,8 @@
 class StateMan //For State Manager
 {
 private:
-    std::stack<std::unique_ptr<State>> m_stateStack; //Pile de pointeurs sur états
-    std::unique_ptr<State> m_newState;
+    std::stack<State*> m_stateStack; //Pile de pointeurs sur états
+    State* m_newState;
 
     bool m_add;
     bool m_replace;
@@ -21,10 +21,10 @@ public:
     StateMan();
     ~StateMan();
 
-    void Add(std::unique_ptr<State> toAdd, bool replace = false);
+    void Add(State* toAdd, bool replace = false);
     void PopCurrent();
     void ProcessStateChange();
-    std::unique_ptr<State>& GetCurrent();
+    State* GetCurrent();
 };
 
 

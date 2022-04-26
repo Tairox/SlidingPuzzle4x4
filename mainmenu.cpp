@@ -33,23 +33,23 @@ void MainMenu::Init()
 
 	selectedIndex_ = 0;
 
-    if (!font.loadFromFile("font/Walk-Around-the-Block.ttf"))
+    if (!fontTitle_.loadFromFile("font/Walk-Around-the-Block.ttf"))
 	{
 		// handle error
 	}
-	title.setFont(font);
-	title.setFillColor(sf::Color::Red);
-	title.setString("Sliding Puzzle");
-	title.setCharacterSize(150);
-    titlePosition.x = 0;
-    titlePosition.y = 0;
-	title.setPosition(titlePosition);
+	title_.setFont(fontTitle_);
+	title_.setFillColor(sf::Color::Red);
+	title_.setString("Sliding Puzzle");
+	title_.setCharacterSize(150);
+    titlePosition_.x = 0;
+    titlePosition_.y = 0;
+	title_.setPosition(titlePosition_);
 
-    if(!bg_texture.loadFromFile("img/background.jpg"))
+    if(!bg_texture_.loadFromFile("img/background.jpg"))
 	{
 		//Handle error
 	}
-    bg_sprite.setTexture(bg_texture);
+    bg_sprite_.setTexture(bg_texture_);
 }
 
 void MainMenu::ProcessInput()
@@ -116,12 +116,12 @@ void MainMenu::Update()
 	text_[selectedIndex_].setStyle(sf::Text::Bold | sf::Text::Underlined);
 
     //Physics
-    if(titlePosition.x <0 || titlePosition.x > rw_.getSize().x - title.getLocalBounds().width)
+    if(titlePosition_.x <0 || titlePosition_.x > rw_.getSize().x - title_.getLocalBounds().width)
     {
-        xVelocity *= -1;
+        xVelocity_ *= -1;
     }
-    titlePosition.x += xVelocity;
-    title.setPosition(titlePosition);
+    titlePosition_.x += xVelocity_;
+    title_.setPosition(titlePosition_);
 
     //Buttons
     if(isExitButtonPressed_)
@@ -131,7 +131,7 @@ void MainMenu::Update()
 
     if(isNewGameButtonPressed_)
     {
-        isInMenu=false;// quand on clique on sort du menu
+        isInMenu_=false;// quand on clique on sort du menu
 
         /*
         int puzzle[4][4];
@@ -154,12 +154,12 @@ void MainMenu::Update()
 
 void MainMenu::Draw()
 {
-    if(isInMenu==true)//on dessine le menu
+    if(isInMenu_==true)//on dessine le menu
     {
         rw_.clear(Color::Black);
 
-	    rw_.draw(bg_sprite);
-	    rw_.draw(title);
+	    rw_.draw(bg_sprite_);
+	    rw_.draw(title_);
         for (int i = 0; i < 3; i++)
 	    {
 	    	rw_.draw(text_[i]);
@@ -167,7 +167,7 @@ void MainMenu::Draw()
         rw_.display(); //Tells app window is done drawing
     }
 
-    if(isInMenu==false)//on dessine le jeu
+    if(isInMenu_==false)//on dessine le jeu
     {
         rw_.clear();
         rw_.display();

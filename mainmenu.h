@@ -12,18 +12,18 @@ private:
     Font font_;
     Text text_[3];
     int selectedIndex_;
-    Text title;
-	Font font;
-	Vector2f titlePosition;
-    float xVelocity = 3;
+    Text title_;
+	Font fontTitle_;
+	Vector2f titlePosition_;
+    float xVelocity_ = 3;
 
-    Texture bg_texture;
-    Sprite bg_sprite;
+    Texture bg_texture_;
+    Sprite bg_sprite_;
 
     bool isExitButtonPressed_ = false;
     bool isPlayButtonPressed_ = false;;
     bool isNewGameButtonPressed_ = false;
-    bool isInMenu=true;// car initialement on est dans le menu
+    bool isInMenu_=true;// car initialement on est dans le menu
 
     RenderWindow & rw_;
 
@@ -34,6 +34,7 @@ public:
     void ProcessInput() override;
     void Update() override;
     void Draw() override;
+    RenderWindow& getRenderWindow(){return rw_;}
 };
 
 #endif
