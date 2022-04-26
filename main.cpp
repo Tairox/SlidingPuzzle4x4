@@ -54,7 +54,7 @@ int main()
 		// handle error
 	}
 	title.setFont(font);
-	title.setColor(sf::Color::Red);
+	title.setFillColor(sf::Color::Red);
 	title.setString("Sliding Puzzle");
 	title.setCharacterSize(150);
 	title.setPosition(titlePosition);
