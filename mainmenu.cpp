@@ -8,11 +8,10 @@ MainMenu::MainMenu(RenderWindow & rw) : rw_(rw) //L'opérateur = n'existe pas po
 
 void MainMenu::Init()
 {
-    if (!font_.loadFromFile("font/Walk-Around-the-Block.ttf"))
+    if (!font_.loadFromFile("font/Retrofuturism.otf"))
 	{
 		// handle error
 	}
-
 	text_[0].setFont(font_);
 	text_[0].setFillColor(sf::Color::Red);
 	text_[0].setString("Play");
@@ -34,19 +33,20 @@ void MainMenu::Init()
 
 	selectedIndex_ = 0;
 
-    if (!fontTitle_.loadFromFile("font/Walk-Around-the-Block.ttf"))
+    if (!fontTitle_.loadFromFile("font/SFAlienEncounters-Italic.ttf"))
 	{
 		// handle error
 	}
 	title_.setFont(fontTitle_);
-	title_.setFillColor(sf::Color::Red);
+    sf::Color colorTitle(5,128,247);//couleur RGB
+	title_.setFillColor(colorTitle);
 	title_.setString("Sliding Puzzle");
 	title_.setCharacterSize(150);
     titlePosition_.x = 0;
     titlePosition_.y = 0;
 	title_.setPosition(titlePosition_);
 
-    if(!bg_texture_.loadFromFile("img/background.jpg"))
+    if(!bg_texture_.loadFromFile("img/background.png"))
 	{
 		//Handle error
 	}
@@ -106,13 +106,16 @@ void MainMenu::ProcessInput()
 
 void MainMenu::Update()
 {
+    sf::Color colorMenuSelected(255,0,193);//couleur RGB
     for(unsigned int i = 0;i<3;i++)
     {
         text_[i].setFillColor(Color::White);
 		//text_[i].setCharacterSize(100);
 		text_[i].setStyle(Text::Regular);
+        text_[i].setFont(font_);
     }
-    text_[selectedIndex_].setFillColor(Color::Red);
+    text_[selectedIndex_].setFillColor(colorMenuSelected);
+    text_[selectedIndex_].setFont(fontTitle_);
 	//text_[selectedIndex_].setCharacterSize(150);
 	text_[selectedIndex_].setStyle(sf::Text::Bold | sf::Text::Underlined);
 
