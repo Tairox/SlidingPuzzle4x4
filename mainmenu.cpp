@@ -5,6 +5,7 @@ MainMenu::MainMenu(RenderWindow & rw) : rw_(rw)
 {
 }
 
+
 void MainMenu::Init()
 {
     if (!font_.loadFromFile("font/Walk-Around-the-Block.ttf"))

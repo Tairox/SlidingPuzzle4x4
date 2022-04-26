@@ -12,10 +12,14 @@ using namespace sf;
 
 int main()
 {
-	Game game;
-	game.Run();
+	//Game game;
+	//game.Run();
 
-	/*RenderWindow window(VideoMode(1920, 1080), "Sliding Puzzle", Style::Default);
+
+
+
+
+	RenderWindow window(VideoMode(1920, 1080), "Sliding Puzzle", Style::Default);
 	window.setFramerateLimit(60);
 
 	MainMenu mainmenu(window);
@@ -27,7 +31,7 @@ int main()
 		mainmenu.ProcessInput();
 		mainmenu.Update();
 		mainmenu.Draw();
-	}*/
+	}
 
 
 #pragma region old
