@@ -1,5 +1,6 @@
-#include"utils.h" //pour la génération de random
-#include "grid.h"
+#include<cstdlib>//génération random
+#include<ctime> //génération random
+#include"grid.h"
 
 Grid::Grid(RenderWindow &RW) : rw(RW) //L'opérateur = n'existe pas pour la classe RenderWindow, on est donc obligé d'utiliser le constructeur de copie.
 {
@@ -217,31 +218,35 @@ void Grid::SetFree()
 
 void Grid::Shuffle()
 {
-    unsigned int i=0;
-    while (i<64)
+    SetFree();
+    unsigned int max = 4; //nbr max-1
+    srand(time(0));
+    for(unsigned int i = 0; i<65535; i++) 
     {
         SetFree();
-        int x=random_at_most(0,3);//génerer un random x [0;3]
-
+        unsigned int x=rand()%max;
         switch (x)
         {
         case 0:
-           MoveUp(PosFree[1],PosFree[0]+1); //on simule un clic sur la case en dessous de la case vide (ce qui fera "remonter" le chiffre et "baisser" la case vide)
-           rw.close();
+            if(PosFree[0]!=0)
+                MoveDown(PosFree[1],PosFree[0]-1);
             break;
         case 1:
-            MoveDown(PosFree[1],PosFree[1]-1);//clic au dessus de la case vide
+            if(PosFree[0]!=3)
+                MoveUp(PosFree[1],PosFree[0]+1);
             break;
         case 2:
-            MoveLeft(PosFree[1]-1,PosFree[0]); //clic à gauche de la case vide
+            if(PosFree[1]!=0)
+                MoveRight(PosFree[1]-1,PosFree[0]);
             break;
         case 3:
-            MoveRight(PosFree[1]+1,PosFree[0]);// clic à droite de la case vide
+            if(PosFree[1]!=3)
+             MoveLeft(PosFree[1]+1,PosFree[0]);
             break;
         default:
             //error
             break;
         }
-        i++;
     }
+  
 }
