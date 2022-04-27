@@ -15,6 +15,7 @@ private:
     unsigned int margeW=560; //marge qu'on laisse de chaque côté de la fenêtre (ça fera donc un carré de 800x800)
     unsigned int margeH=140;//marge qu'on laisse en haut et en bas
     bool isGridSet=false;
+    bool isResolved=false;
 
 public:
     Grid(RenderWindow &);
@@ -29,4 +30,5 @@ public:
     void MoveLeft(unsigned int x, unsigned int y);
     void MoveRight(unsigned int x, unsigned int y);
     void SetFree();// pour avoir la position de la case vide (case 16) int* car x et y à retourner
-};
+    void checkIsResolved();
+    };

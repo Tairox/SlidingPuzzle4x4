@@ -28,7 +28,7 @@ void Grid::Init()
       {
         if(isGridSet==false)
         {
-        puzzle[j][k].setString(std::to_string(i)); // on convertit l'int i en string "i"
+            puzzle[j][k].setString(std::to_string(i)); // on convertit l'int i en string "i"
         }
         puzzle[j][k].setFont(font); // on définit la police de tout les éléments
         puzzle[j][k].setCharacterSize(150);
@@ -121,7 +121,7 @@ void Grid::ProcessInput()
 
 void Grid::Update()
 {
-
+    checkIsResolved();
 }
 
 void Grid::Draw()
@@ -132,21 +132,28 @@ void Grid::Draw()
     {
         rw.draw(lines[i]);
     }
-
     //Affichage des chiffre de la grille
     /*puzzle[2][1].setFont(font);
     puzzle[2][1].setPosition(500,200);
     puzzle[2][1].setCharacterSize(100);
     rw.draw(puzzle[2][1]);*/
-
     for(unsigned int j=0;j<4;j++)
-   {
-      for(unsigned int k=0;k<4;k++)
-      {
-        if(puzzle[j][k].getString()!="16") //si c'est 16 alors c'est la case vide donc on ne l'affiche pas
-        rw.draw(puzzle[j][k]);
-      }
-   }
+    {
+        for(unsigned int k=0;k<4;k++)
+        {
+            if(puzzle[j][k].getString()!="16") //si c'est 16 alors c'est la case vide donc on ne l'affiche pas
+            rw.draw(puzzle[j][k]);
+        }
+    }
+    if(isResolved==true)
+    {
+        Text win;
+        win.setFont(font);
+        win.setString("WINNER WINNER CHICKEN DINNER");
+        win.setCharacterSize(100);
+        win.setPosition(380,20);
+        rw.draw(win);
+    }
     rw.display();
 }
 
@@ -249,4 +256,30 @@ void Grid::Shuffle()
         }
     }
   
+}
+
+void Grid::checkIsResolved()
+{
+    //création du puzzle (1,2,3,4,...,16) on consid-re 16 la case vide
+    unsigned int same=0;
+    unsigned int i=1;
+    for(unsigned int j=0;j<4;j++)
+   {
+      for(unsigned int k=0;k<4;k++)
+      {
+        if(puzzle[j][k].getString()==std::to_string(i)) // si case=i
+        {
+            same++;
+        }
+        i++;
+      }
+   }
+   if(same==16) //si toutes les cases sont dans le bon ordre
+   {
+       isResolved=true;
+   }
+   else
+   {
+       isResolved=false;
+   }
 }
