@@ -15,6 +15,7 @@ Game::Game()
     mainMenu_ = new MainMenu(window_);
     mainMenu_->Init();
     grid = new Grid(window_);
+    grid->Init();
 }
 
 void Game::run()
@@ -31,6 +32,7 @@ void Game::run()
         else
         {
             grid->ProcessInput();
+            grid->Update();
             grid->Draw();
         }
 	}
