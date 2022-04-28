@@ -1,6 +1,7 @@
 #include "mainmenu.h"
 #include "grid.h"
 #include <fstream>
+#include <iostream>
 using namespace std;
 
 class Game

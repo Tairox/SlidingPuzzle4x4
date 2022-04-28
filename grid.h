@@ -16,6 +16,7 @@ private:
     unsigned int margeH=140;//marge qu'on laisse en haut et en bas
     bool isGridSet=false;
     bool isResolved=false;
+    int* savePuzzle_;
 
 public:
     Grid(RenderWindow &);
@@ -31,4 +32,5 @@ public:
     void MoveRight(unsigned int x, unsigned int y);
     void SetFree();// pour avoir la position de la case vide (case 16) int* car x et y à retourner
     void checkIsResolved();
+    int* getPuzzle();
     };
