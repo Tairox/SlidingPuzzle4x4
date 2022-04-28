@@ -1,5 +1,7 @@
 #include "mainmenu.h"
 #include "grid.h"
+#include <fstream>
+using namespace std;
 
 class Game
 {
@@ -8,6 +10,8 @@ class Game
     RenderWindow window_;
     MainMenu * mainMenu_;
     Grid * grid;
+
+    ofstream ofs;
 
     bool isInMenu=true;//au lancement du jeu, on est dans le menu
 
