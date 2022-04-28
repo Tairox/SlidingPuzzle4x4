@@ -51,6 +51,18 @@ void MainMenu::Init()
 		//Handle error
 	}
     bg_sprite_.setTexture(bg_texture_);
+
+    if (!bufferSelect_.loadFromFile("sounds/select_menu.wav"))
+    {
+        //Handle error
+    }
+    soundSelect_.setBuffer(bufferSelect_);
+
+    if (!bufferEnter_.loadFromFile("sounds/enter_menu.wav"))
+    {
+        //Handle error
+    }
+    soundEnter_.setBuffer(bufferEnter_);
 }
 
 void MainMenu::ProcessInput()
@@ -68,6 +80,7 @@ void MainMenu::ProcessInput()
                 if (selectedIndex_ - 1 >= 0)
                 {
                     selectedIndex_--;
+                    soundSelect_.play();
                 }
                 break;
 
@@ -75,6 +88,7 @@ void MainMenu::ProcessInput()
                 if (selectedIndex_ + 1 < 3)
                 {
                     selectedIndex_++;
+                    soundSelect_.play();
                 }
                 break;
             case Keyboard::Escape:
@@ -85,12 +99,15 @@ void MainMenu::ProcessInput()
                 {
                 case 0:
                     isPlayButtonPressed_ = true;
+                    soundEnter_.play();
                     break;
                 case 1:
                     isNewGameButtonPressed_ = true;
+                    soundEnter_.play();
                     break;
                 case 2:
                     isExitButtonPressed_ = true;
+                    soundEnter_.play();
                     break;
                 }
                 break;

@@ -4,6 +4,8 @@
 #include <SFML/Graphics.hpp>
 using namespace sf;
 
+#include <SFML/Audio.hpp>
+
 #include "state.h"
 
 class MainMenu : public State
@@ -23,6 +25,12 @@ private:
     bool isExitButtonPressed_ = false;
     bool isPlayButtonPressed_ = false;;
     bool isNewGameButtonPressed_ = false;
+
+    SoundBuffer bufferSelect_;
+    Sound soundSelect_;
+    SoundBuffer bufferEnter_;
+    Sound soundEnter_;
+
 
     RenderWindow & rw_;
 
