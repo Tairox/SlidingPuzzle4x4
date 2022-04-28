@@ -19,6 +19,8 @@ private:
     bool isResolved=false;
     int* savePuzzle_;
 
+    bool isExitButtonPressed=false;
+
     SoundBuffer bufferWin_;
     Sound soundWin_;
 
@@ -38,4 +40,5 @@ public:
     void checkIsResolved();
     int* getPuzzle();
     void setPuzzle(int*);
+    bool isInMenu();
     };

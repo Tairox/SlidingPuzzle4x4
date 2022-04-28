@@ -85,12 +85,20 @@ void Grid::Init()
 
 void Grid::ProcessInput()
 {
+    isExitButtonPressed=false;
     Event ev;
     
     while (rw.pollEvent(ev))
     {
         switch (ev.type)
         {
+        
+        case Event::KeyPressed:
+            if(ev.key.code==Keyboard::Escape)
+            {
+                isExitButtonPressed=true;
+            }
+            break;
 
         case sf::Event::Closed:
             rw.close();
@@ -321,5 +329,17 @@ void Grid::setPuzzle(int* sender) //On ecrase la configuration initiale avec la 
         {
              puzzle[i][j].setString(std::to_string(sender[(i*4)+j]));
         }
+    }
+}
+
+bool Grid::isInMenu()
+{
+    if(isExitButtonPressed)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
     }
 }
