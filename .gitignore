@@ -9,3 +9,4 @@
 !font
 !*.ttf
 !*.otf
+!openal32.dll
