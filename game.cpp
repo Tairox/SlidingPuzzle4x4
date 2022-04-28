@@ -36,6 +36,16 @@ void Game::run()
             grid->Draw();
         }
 	}
+
+    ofs.open("save/save.txt"); //Ouverture du fichier de sauvegarde dans ofs.
+    if(!ofs.is_open())
+    {
+        //Handle error
+    }
+    else
+    {
+        //
+    }
 }
 
 Game::~Game()
