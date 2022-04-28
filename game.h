@@ -23,4 +23,5 @@ public:
     ~Game();
     void CheckIsInMenu();
     void run();
+    void save();
 };

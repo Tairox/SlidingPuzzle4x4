@@ -36,7 +36,25 @@ void Game::run()
             grid->Draw();
         }
 	}
+}
 
+Game::~Game()
+{
+    delete mainMenu_;
+    delete grid;
+}
+
+void Game::CheckIsInMenu()
+{
+    if(isInMenu)
+    {
+    isInMenu=mainMenu_->isInMenu();
+    }
+    //else isInMenu=grid->isInMenu();
+}
+
+void Game::save()
+{
     // Sauvegarde à la fermeture de l'application :
     // On vérifie que l'utilisateur n'est pas resté dans le menu :
 
@@ -69,19 +87,4 @@ void Game::run()
         
     } 
     delete grid->getPuzzle(); // Bien penser à supprimer le pointeur de grid ici ou pas ?
-}
-
-Game::~Game()
-{
-    delete mainMenu_;
-    delete grid;
-}
-
-void Game::CheckIsInMenu()
-{
-    if(isInMenu)
-    {
-    isInMenu=mainMenu_->isInMenu();
-    }
-    //else isInMenu=grid->isInMenu();
 }
