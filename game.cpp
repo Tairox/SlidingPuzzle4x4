@@ -62,7 +62,7 @@ void Game::CheckIsInMenu()
 {
     if(isInMenu)
     {
-    isInMenu=mainMenu_->isInMenu();
+        isInMenu=mainMenu_->isInMenu();
     }
     else
     {
