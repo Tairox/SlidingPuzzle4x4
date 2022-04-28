@@ -170,7 +170,7 @@ void MainMenu::Draw()
 
 bool MainMenu::isInMenu()
 {
-    if(isNewGameButtonPressed_)
+    if(isNewGameButtonPressed_ || isPlayButtonPressed_)
     {return false;}
     else
     {return true;}

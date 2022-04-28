@@ -13,6 +13,8 @@ class Game
     Grid * grid;
 
     ofstream ofs;
+    ifstream ifs;
+    int* sender;
 
     bool isInMenu=true;//au lancement du jeu, on est dans le menu
 
@@ -24,4 +26,5 @@ public:
     void CheckIsInMenu();
     void run();
     void save();
+    void charge();
 };

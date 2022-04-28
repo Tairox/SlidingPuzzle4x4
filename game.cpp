@@ -31,9 +31,21 @@ void Game::run()
         }
         else
         {
-            grid->ProcessInput();
-            grid->Update();
-            grid->Draw();
+            if(mainMenu_->isplayPressed())
+            {
+                //On ecrase la configuration initiale de la grille si l'utilisateur appuit sur play et qu'une sauvegarde est trouvée.
+                charge();
+                grid->ProcessInput();
+                grid->Update();
+                grid->Draw();
+            }
+            else
+            {
+                grid->ProcessInput();
+                grid->Update();
+                grid->Draw();
+            }
+            
         }
 	}
 }
@@ -42,6 +54,7 @@ Game::~Game()
 {
     delete mainMenu_;
     delete grid;
+    delete [] sender;
 }
 
 void Game::CheckIsInMenu()
@@ -87,4 +100,31 @@ void Game::save()
         
     } 
     delete grid->getPuzzle(); // Bien penser à supprimer le pointeur de grid ici ou pas ?
+}
+
+void Game::charge()
+{
+    sender = new int[16];
+
+    ifs.open("save/save.txt");
+    if(!ifs.is_open())
+    {
+        cout<<"Erreur d'ouverture"<<endl;
+    }
+    else
+    {
+        for(unsigned int i=0;i<16;i++)
+        {
+            ifs>>sender[i];
+        }
+        if(!ifs.good())
+        {
+            cout<<"Erreur de lecture"<<endl;
+        }
+        else
+        {
+            cout<<"Lecture terminée"<<endl;
+            grid->setPuzzle(sender);
+        }
+    }
 }

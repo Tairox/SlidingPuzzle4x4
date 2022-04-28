@@ -42,6 +42,7 @@ public:
     void Update() override;
     void Draw() override;
     bool isInMenu();
+    bool isplayPressed() {return isPlayButtonPressed_;}
 };
 
 #endif

@@ -37,4 +37,5 @@ public:
     void SetFree();// pour avoir la position de la case vide (case 16) int* car x et y à retourner
     void checkIsResolved();
     int* getPuzzle();
+    void setPuzzle(int*);
     };

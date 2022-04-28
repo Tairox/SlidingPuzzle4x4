@@ -312,3 +312,14 @@ int* Grid::getPuzzle()
     }
     return savePuzzle_;
 }
+
+void Grid::setPuzzle(int* sender) //On ecrase la configuration initiale avec la nouvelle configuration chargée depuis la sauvegarde
+{
+    for(unsigned int i = 0; i<4;i++)
+    {
+        for(unsigned int j = 0; j<4;j++)
+        {
+             puzzle[i][j].setString(std::to_string(sender[(i*4)+j]));
+        }
+    }
+}
