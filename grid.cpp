@@ -1,6 +1,8 @@
 #include<cstdlib>//génération random
 #include<ctime> //génération random
 #include"grid.h"
+#include <string>
+using namespace std;
 
 Grid::Grid(RenderWindow &RW) : rw(RW) //L'opérateur = n'existe pas pour la classe RenderWindow, on est donc obligé d'utiliser le constructeur de copie.
 {
@@ -294,4 +296,19 @@ void Grid::checkIsResolved()
    {
        isResolved=false;
    }
+}
+
+int* Grid::getPuzzle()
+{
+    savePuzzle_ = new int [16];
+    string text;
+    for(unsigned int i=0;i<4;i++) // 4 itérations pour les 4 lignes
+    {
+        for(unsigned int j =0;j<4;j++) // 4 premières colonnes de la première ligne
+        {
+            text = puzzle[i][j].getString();
+            savePuzzle_[(i*4)+j] = stoi(text);
+        }
+    }
+    return savePuzzle_;
 }

@@ -165,7 +165,7 @@ void MainMenu::Draw()
     {
     	rw_.draw(text_[i]);
     }
-    rw_.display(); //Tells app window is done drawing
+    rw_.display();
 }
 
 bool MainMenu::isInMenu()
