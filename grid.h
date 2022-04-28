@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "state.h"
 using namespace sf;
 
@@ -16,6 +17,9 @@ private:
     unsigned int margeH=140;//marge qu'on laisse en haut et en bas
     bool isGridSet=false;
     bool isResolved=false;
+
+    SoundBuffer bufferWin_;
+    Sound soundWin_;
 
 public:
     Grid(RenderWindow &);

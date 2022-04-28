@@ -45,6 +45,12 @@ void Grid::Init()
    }
     isGridSet=true;
 
+    if (!bufferWin_.loadFromFile("sound/SIUU.wav"))
+    {
+        //Handle error
+    }
+    soundWin_.setBuffer(bufferWin_);
+
     // création de 5 lignes verticales |
     for (unsigned int i = 0; i < 5; i++)
     {
@@ -110,7 +116,13 @@ void Grid::ProcessInput()
                 if((mousePosition.x)-1==PosFree[1] && (mousePosition.y)==PosFree[0]) // case à gauche vide
                 {
                     MoveLeft(mousePosition.x,mousePosition.y); // case cliquée va à gauche
-                } 
+                }
+
+                checkIsResolved();
+                if(isResolved)
+                {
+                    soundWin_.play();
+                }
             }
             break;
         }
