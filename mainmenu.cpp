@@ -69,11 +69,14 @@ void MainMenu::ProcessInput()
 {
     Event ev;
     
+    isExitButtonPressed_=false;
+    isPlayButtonPressed_=false,
+    isNewGameButtonPressed_=false;
     while (rw_.pollEvent(ev))
     {
         switch (ev.type)
         {
-        case Event::KeyReleased:
+        case Event::KeyPressed:
             switch (ev.key.code)
             {
             case Keyboard::Up:

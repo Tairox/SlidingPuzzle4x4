@@ -43,6 +43,7 @@ public:
     void Draw() override;
     bool isInMenu();
     bool isplayPressed() {return isPlayButtonPressed_;}
+    bool isNewGamePressed() {return isNewGameButtonPressed_;}
 };
 
 #endif

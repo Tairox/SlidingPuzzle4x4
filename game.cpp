@@ -22,29 +22,30 @@ void Game::run()
 {
     while(window_.isOpen())
     {
-        CheckIsInMenu();//si btn "new game" appuyé alors isInMenu devient false
         if(isInMenu==true)
         {
+            CheckIsInMenu();
             mainMenu_->ProcessInput();
+            if(mainMenu_->isplayPressed())
+            {
+                charge();
+            }
+
+            if(mainMenu_->isNewGamePressed())
+            {
+                grid->Shuffle();
+            }
+
             mainMenu_->Update();
             mainMenu_->Draw();
         }
         else
         {
-            if(mainMenu_->isplayPressed())
-            {
-                //On ecrase la configuration initiale de la grille si l'utilisateur appuit sur play et qu'une sauvegarde est trouvée.
-                charge();
-                grid->ProcessInput();
-                grid->Update();
-                grid->Draw();
-            }
-            else
-            {
-                grid->ProcessInput();
-                grid->Update();
-                grid->Draw();
-            }
+            CheckIsInMenu();
+            grid->ProcessInput();
+            grid->Update();
+            grid->Draw();
+
             
         }
 	}
@@ -63,7 +64,10 @@ void Game::CheckIsInMenu()
     {
     isInMenu=mainMenu_->isInMenu();
     }
-    //else isInMenu=grid->isInMenu();
+    else
+    {
+        isInMenu=grid->isInMenu();
+    }
 }
 
 void Game::save()
