@@ -52,13 +52,13 @@ void MainMenu::Init()
 	}
     bg_sprite_.setTexture(bg_texture_);
 
-    if (!bufferSelect_.loadFromFile("sounds/select_menu.wav"))
+    if (!bufferSelect_.loadFromFile("sound/select_menu.wav"))
     {
         //Handle error
     }
     soundSelect_.setBuffer(bufferSelect_);
 
-    if (!bufferEnter_.loadFromFile("sounds/enter_menu.wav"))
+    if (!bufferEnter_.loadFromFile("sound/enter_menu.wav"))
     {
         //Handle error
     }
