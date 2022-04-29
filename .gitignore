@@ -1,6 +1,5 @@
 *
 !save
-!*.txt
 !*.cpp
 !*.h
 !img
