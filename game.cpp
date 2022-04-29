@@ -73,37 +73,27 @@ void Game::CheckIsInMenu()
 void Game::save()
 {
     // Sauvegarde à la fermeture de l'application :
-    // On vérifie que l'utilisateur n'est pas resté dans le menu :
-
-    if(mainMenu_->isInMenu())
+    ofs.open("save/save.txt"); //Ouverture du fichier de sauvegarde dans ofs.
+    if(!ofs.is_open())
     {
-        // Ne pas sauvegarder
+        //Handle error
     }
     else
     {
-        ofs.open("save/save.txt"); //Ouverture du fichier de sauvegarde dans ofs.
-        if(!ofs.is_open())
+        for(unsigned int i=0;i<16;i++)
         {
-            //Handle error
+            ofs<<grid->getPuzzle()[i]<<endl;
+        }
+        if(!ofs.good())
+        {
+            cout<<"Erreur d'écriture"<<endl;
         }
         else
         {
-            for(unsigned int i=0;i<16;i++)
-            {
-                ofs<<grid->getPuzzle()[i]<<endl;
-            }
-            if(!ofs.good())
-            {
-                cout<<"Erreur d'écriture"<<endl;
-            }
-            else
-            {
-                cout<<"Enregistrement réussis"<<endl;
-            }
+            cout<<"Enregistrement réussis"<<endl;
         }
-        
-    } 
-    delete grid->getPuzzle(); // Bien penser à supprimer le pointeur de grid ici ou pas ?
+    }
+    delete grid->getPuzzle(); // Bien penser à supprimer le pointeur de grid
 }
 
 void Game::charge()

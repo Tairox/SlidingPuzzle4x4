@@ -18,8 +18,6 @@ class Game
 
     bool isInMenu=true;//au lancement du jeu, on est dans le menu
 
-    //MainMenu mainMenu_; //Composition
-
 public:
     Game();
     ~Game();
