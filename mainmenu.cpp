@@ -63,6 +63,15 @@ void MainMenu::Init()
         //Handle error
     }
     soundEnter_.setBuffer(bufferEnter_);
+
+    if (!music_.openFromFile("music/MainMenuMusic.wav"))
+    {
+        //Handle error
+    }
+    music_.setVolume(100);
+    music_.setLoop(true);
+    music_.play();
+ 
 }
 
 void MainMenu::ProcessInput()

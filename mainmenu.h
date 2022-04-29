@@ -31,6 +31,8 @@ private:
     SoundBuffer bufferEnter_;
     Sound soundEnter_;
 
+    Music music_;
+
 
     RenderWindow & rw_;
 
