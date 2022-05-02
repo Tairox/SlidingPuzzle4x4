@@ -12,6 +12,14 @@ Game::Game()
 	}
 	window_.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr()); //permet de définir l'icône de la fenêtre à partir d'un sf::Image
 
+     if (!music_.openFromFile("music/MainMenuMusic.wav"))
+    {
+        //Handle error
+    }
+    music_.setVolume(50);
+    music_.setLoop(true);
+    music_.play();
+
     mainMenu_ = new MainMenu(window_);
     mainMenu_->Init();
     grid = new Grid(window_);
