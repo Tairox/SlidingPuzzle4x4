@@ -55,7 +55,7 @@ Game::~Game()
 {
     delete mainMenu_;
     delete grid;
-    delete [] sender;
+    //delete [] sender;
 }
 
 void Game::CheckIsInMenu()

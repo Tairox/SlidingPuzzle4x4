@@ -121,13 +121,20 @@ void MainMenu::ProcessInput()
                     isExitButtonPressed_ = true;
                     soundEnter_.play();
                     break;
+                default: //dans les autres cas on ne fait rien
+                    break;
                 }
+                break;
+            default: //dans les autres cas on ne fait rien
                 break;
             }
             break;
 
         case sf::Event::Closed:
             rw_.close();
+            break;
+
+        default: //dans les autres cas on ne fait rien
             break;
         }
     }

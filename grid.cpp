@@ -9,6 +9,12 @@ Grid::Grid(RenderWindow &RW) : rw(RW) //L'opérateur = n'existe pas pour la clas
 
 }
 
+Grid::~Grid()
+{
+    // ? delete PosFree;
+    // ? delete savePuzzle_;
+}
+
 void Grid::Init()
 {
     //chargement de la police
@@ -90,6 +96,7 @@ void Grid::ProcessInput()
     
     while (rw.pollEvent(ev))
     {
+        sf::Vector2i mousePosition;
         switch (ev.type)
         {
         
@@ -105,12 +112,12 @@ void Grid::ProcessInput()
             break;
 
         case sf::Event::MouseButtonPressed: // clic gauche
-            sf::Vector2i mousePosition = sf::Mouse::getPosition(rw);
+            mousePosition = sf::Mouse::getPosition(rw);
             if (mousePosition.x>margeW && mousePosition.x<1360 && mousePosition.y>margeH && mousePosition.y<940)
             {   //si on est dans la grille
                 SetFree();//on récupère la pos de la case vide
-                mousePosition.x=(mousePosition.x - margeW)/200;//[i] de [i][j] 3
-                mousePosition.y=(mousePosition.y -margeH)/200;//[j] de [i][j] 2
+                mousePosition.x=(mousePosition.x - margeW)/200;
+                mousePosition.y=(mousePosition.y -margeH)/200;
                 if(mousePosition.x==PosFree[1] && (mousePosition.y)+1==PosFree[0]) //case du dessous est vide
                 {
                     MoveDown(mousePosition.x,mousePosition.y); //on fait baisser la case cliquée
@@ -134,6 +141,8 @@ void Grid::ProcessInput()
                     soundWin_.play();
                 }
             }
+            break;
+        default:
             break;
         }
     }

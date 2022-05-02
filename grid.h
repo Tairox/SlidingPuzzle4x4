@@ -26,6 +26,7 @@ private:
 
 public:
     Grid(RenderWindow &);
+    ~Grid();
     void Init() override;
     void ProcessInput() override;
     void Update() override;
