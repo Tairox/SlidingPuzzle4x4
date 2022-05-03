@@ -16,7 +16,7 @@ private:
     unsigned int margeW=560; //marge qu'on laisse de chaque côté de la fenêtre (ça fera donc un carré de 800x800)
     unsigned int margeH=140;//marge qu'on laisse en haut et en bas
     bool isGridSet=false;
-    bool isResolved=false;
+    bool isResolved_=false;
     int* savePuzzle_;
 
     bool isExitButtonPressed=false;

@@ -136,7 +136,7 @@ void Grid::ProcessInput()
                 }
 
                 checkIsResolved();
-                if(isResolved)
+                if(isResolved_)
                 {
                     soundWin_.play();
                 }
@@ -176,7 +176,7 @@ void Grid::Draw()
             rw.draw(puzzle[j][k]);
         }
     }
-    if(isResolved==true)
+    if(isResolved_==true)
     {
         Text win;
         win.setFont(font);
@@ -184,7 +184,24 @@ void Grid::Draw()
         win.setCharacterSize(100);
         win.setPosition(380,20);
         rw.draw(win);
+        for(unsigned int j=0;j<4;j++)
+        {
+            for(unsigned int k=0;k<4;k++)
+            {
+                puzzle[j][k].setFillColor(Color::Green);
+            }
+        }
     }
+    else
+    {
+        for(unsigned int j=0;j<4;j++)
+        {
+            for(unsigned int k=0;k<4;k++)
+            {
+                puzzle[j][k].setFillColor(Color::White);
+            }
+        }
+    } 
     rw.display();
 }
 
@@ -228,7 +245,6 @@ void Grid::MoveLeft(unsigned int x, unsigned int y) //case cliquée va à gauche
     String CaseDeGauche = puzzle[y][x-1].getString();
     puzzle[y][x].setString(CaseDeGauche);
     puzzle[y][x-1].setString(CaseCliquee);
-    
 }
 
 void Grid::MoveRight(unsigned int x, unsigned int y) //case cliquée va à droite
@@ -279,14 +295,27 @@ void Grid::Shuffle()
             break;
         case 3:
             if(PosFree[1]!=3)
-             MoveLeft(PosFree[1]+1,PosFree[0]);
+                MoveLeft(PosFree[1]+1,PosFree[0]);
             break;
         default:
             //error
             break;
         }
     }
-  
+    
+    //une fois le puzzle mélangé on ramène la case vide en bas à droite
+    SetFree();
+    while(PosFree[0]!=3)
+    {
+        MoveUp(PosFree[1],PosFree[0]+1);
+        SetFree();
+    }
+
+    while(PosFree[1]!=3)
+    {
+        MoveLeft(PosFree[1]+1,PosFree[0]);
+        SetFree();
+    }
 }
 
 void Grid::checkIsResolved()
@@ -307,11 +336,11 @@ void Grid::checkIsResolved()
    }
    if(same==16) //si toutes les cases sont dans le bon ordre
    {
-       isResolved=true;
+       isResolved_=true;
    }
    else
    {
-       isResolved=false;
+       isResolved_=false;
    }
 }
 
