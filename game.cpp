@@ -63,7 +63,7 @@ Game::~Game()
 {
     delete mainMenu_;
     delete grid_;
-    //delete [] sender;
+    //delete sender_;
 }
 
 void Game::checkIsInMenu()
@@ -101,7 +101,7 @@ void Game::save()
             cout<<"Enregistrement réussis"<<endl;
         }
     }
-    delete grid_->getPuzzle(); // Bien penser à supprimer le pointeur de grid_
+    //delete grid_->getPuzzle(); // Bien penser à supprimer le pointeur de grid_
 }
 
 void Game::charge()
