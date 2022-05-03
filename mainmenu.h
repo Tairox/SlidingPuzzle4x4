@@ -36,10 +36,10 @@ private:
 public:
     MainMenu(RenderWindow &);
 
-    void Init() override;
-    void ProcessInput() override;
-    void Update() override;
-    void Draw() override;
+    void init() override;
+    void processInput() override;
+    void update() override;
+    void draw() override;
     bool isInMenu();
     bool isplayPressed() {return isPlayButtonPressed_;}
     bool isNewGamePressed() {return isNewGameButtonPressed_;}

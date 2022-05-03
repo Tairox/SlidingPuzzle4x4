@@ -7,19 +7,19 @@ using namespace sf;
 class Grid : public State
 {
 private:
-    Font font;
-    Text puzzle[4][4];//on utilise sf::Text car si on utilise unsigned int on ne pourra pas l'afficher
-    int* PosFree;
-    std::vector<RectangleShape> lines; // lignes de la grille (à la fois horizontales et verticales)
-    //bool isInMenu_=true; pas  utile c dans game mtn il nous faut une méthode CheckIsInMenu
-    RenderWindow & rw;
-    unsigned int margeW=560; //marge qu'on laisse de chaque côté de la fenêtre (ça fera donc un carré de 800x800)
-    unsigned int margeH=140;//marge qu'on laisse en haut et en bas
-    bool isGridSet=false;
+    Font font_;
+    Text puzzle_[4][4];//on utilise sf::Text car si on utilise unsigned int on ne pourra pas l'afficher
+    int* posFree_;
+    std::vector<RectangleShape> lines_; // lignes de la grille (à la fois horizontales et verticales)
+    //bool isInMenu_=true; pas  utile c dans game mtn il nous faut une méthode checkIsInMenu
+    RenderWindow & rw_;
+    unsigned int margeW_=560; //marge qu'on laisse de chaque côté de la fenêtre (ça fera donc un carré de 800x800)
+    unsigned int margeH_=140;//marge qu'on laisse en haut et en bas
+    bool isGridSet_=false;
     bool isResolved_=false;
     int* savePuzzle_;
 
-    bool isExitButtonPressed=false;
+    bool isExitButtonPressed_=false;
 
     SoundBuffer bufferWin_;
     Sound soundWin_;
@@ -27,17 +27,17 @@ private:
 public:
     Grid(RenderWindow &);
     ~Grid();
-    void Init() override;
-    void ProcessInput() override;
-    void Update() override;
-    void Draw() override;
-    //méthodes spécifiques au puzzle
-    void Shuffle();//pour mélanger le taquin (mélanger un taquin soluble fait qu'il est automatiquement soluble
-    void MoveUp(unsigned int x,unsigned int y);// c'est contre-intuitif : x et y sont inversés (x en abscisse et y en ord)
-    void MoveDown(unsigned int x,unsigned int y);
-    void MoveLeft(unsigned int x, unsigned int y);
-    void MoveRight(unsigned int x, unsigned int y);
-    void SetFree();// pour avoir la position de la case vide (case 16) int* car x et y à retourner
+    void init() override;
+    void processInput() override;
+    void update() override;
+    void draw() override;
+    //méthodes spécifiques au puzzle_
+    void shuffle();//pour mélanger le taquin (mélanger un taquin soluble fait qu'il est automatiquement soluble
+    void moveUp(unsigned int x,unsigned int y);// c'est contre-intuitif : x et y sont inversés (x en abscisse et y en ord)
+    void moveDown(unsigned int x,unsigned int y);
+    void moveLeft(unsigned int x, unsigned int y);
+    void moveRight(unsigned int x, unsigned int y);
+    void getFree();// pour avoir la position de la case vide (case 16) int* car x et y à retourner
     void checkIsResolved();
     int* getPuzzle();
     void setPuzzle(int*);

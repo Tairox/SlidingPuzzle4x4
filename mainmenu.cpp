@@ -6,7 +6,7 @@ MainMenu::MainMenu(RenderWindow & rw) : rw_(rw) //L'opérateur = n'existe pas po
 }
 
 
-void MainMenu::Init()
+void MainMenu::init()
 {
     if (!font_.loadFromFile("font/Retrofuturism.otf"))
 	{
@@ -65,7 +65,7 @@ void MainMenu::Init()
     soundEnter_.setBuffer(bufferEnter_);
 }
 
-void MainMenu::ProcessInput()
+void MainMenu::processInput()
 {
     Event ev;
     
@@ -131,7 +131,7 @@ void MainMenu::ProcessInput()
     }
 }
 
-void MainMenu::Update()
+void MainMenu::update()
 {
     sf::Color colorMenuSelected(255,0,193);//couleur RGB
     for(unsigned int i = 0;i<3;i++)
@@ -166,7 +166,7 @@ void MainMenu::Update()
     }
 }
 
-void MainMenu::Draw()
+void MainMenu::draw()
 {
     rw_.clear(Color::Black);
     rw_.draw(bg_sprite_);

@@ -4,28 +4,28 @@
 #include <string>
 using namespace std;
 
-Grid::Grid(RenderWindow &RW) : rw(RW) //L'opérateur = n'existe pas pour la classe RenderWindow, on est donc obligé d'utiliser le constructeur de copie.
+Grid::Grid(RenderWindow &RW) : rw_(RW) //L'opérateur = n'existe pas pour la classe RenderWindow, on est donc obligé d'utiliser le constructeur de copie.
 {
 
 }
 
 Grid::~Grid()
 {
-    // ? delete PosFree;
+    // ? delete posFree_;
     // ? delete savePuzzle_;
 }
 
-void Grid::Init()
+void Grid::init()
 {
     //chargement de la police
-    if (!font.loadFromFile("font/Retrofuturism.otf"))
+    if (!font_.loadFromFile("font/Retrofuturism.otf"))
 	{
 		// handle error
 	}
     
-    unsigned int width=rw.getSize().x; // ici 1920
-    unsigned int height=rw.getSize().y; //ici 1080
-    unsigned int sizeLine=(width-margeW)-(0+margeW);// ici 1920-560 - 560 =  1360 - 560 = 800, on aura donc des traits de 800px de long
+    unsigned int width_=rw_.getSize().x; // ici 1920
+    unsigned int height_=rw_.getSize().y; //ici 1080
+    unsigned int sizeLine=(width_-margeW_)-(0+margeW_);// ici 1920-560 - 560 =  1360 - 560 = 800, on aura donc des traits de 800px de long
     unsigned int gap = sizeLine /4; //car on dessine 4 traits après le premier donc 800/4=200
     
     //création du puzzle (1,2,3,4,...,16) on consid-re 16 la case vide
@@ -34,24 +34,24 @@ void Grid::Init()
    {
       for(unsigned int k=0;k<4;k++)
       {
-        if(isGridSet==false)
+        if(isGridSet_==false)
         {
-            puzzle[j][k].setString(std::to_string(i)); // on convertit l'int i en string "i"
+            puzzle_[j][k].setString(std::to_string(i)); // on convertit l'int i en string "i"
         }
-        puzzle[j][k].setFont(font); // on définit la police de tout les éléments
-        puzzle[j][k].setCharacterSize(150);
+        puzzle_[j][k].setFont(font_); // on définit la police de tout les éléments
+        puzzle_[j][k].setCharacterSize(150);
         //on définit la position de chaque élément de la grille
-        puzzle[j][k].setPosition(560+gap/4+gap*k,140+gap*j);
+        puzzle_[j][k].setPosition(560+gap/4+gap*k,140+gap*j);
         i++;
       }
    }
-   if(isGridSet==false)
+   if(isGridSet_==false)
    {
-       PosFree = new int[2];
-       SetFree();
-       Shuffle();
+       posFree_ = new int[2];
+       getFree();
+       shuffle();
    }
-    isGridSet=true;
+    isGridSet_=true;
 
     if (!bufferWin_.loadFromFile("sound/SIUU.wav"))
     {
@@ -62,39 +62,39 @@ void Grid::Init()
     // création de 5 lignes verticales |
     for (unsigned int i = 0; i < 5; i++)
     {
-        lines.push_back(RectangleShape(Vector2f(6, sizeLine)));
+        lines_.push_back(RectangleShape(Vector2f(6, sizeLine)));
     }
 
     // 5 lignes horizontales —
     for (unsigned int i = 0; i < 5; i++)
     {
-        lines.push_back(sf::RectangleShape(sf::Vector2f(sizeLine, 6)));
+        lines_.push_back(sf::RectangleShape(sf::Vector2f(sizeLine, 6)));
     }
 
     // Positionnement des lignes verticales
     for (unsigned int i = 0; i < 5; i++)
     {
-        lines[i].setPosition(margeW+gap*i,margeH);
+        lines_[i].setPosition(margeW_+gap*i,margeH_);
     }
     // Positionnement des lignes horizontales
     for (unsigned int i = 0; i < 5; i++)
     {
-        lines[i+5].setPosition(margeW,margeH+gap*i);
+        lines_[i+5].setPosition(margeW_,margeH_+gap*i);
     }
 
     // On colorie les lignes en blanc
-    for (size_t i = 0; i < lines.size(); i++)
+    for (size_t i = 0; i < lines_.size(); i++)
     {
-        lines[i].setFillColor(sf::Color::White);
+        lines_[i].setFillColor(sf::Color::White);
     }
 }
 
-void Grid::ProcessInput()
+void Grid::processInput()
 {
-    isExitButtonPressed=false;
+    isExitButtonPressed_=false;
     Event ev;
     
-    while (rw.pollEvent(ev))
+    while (rw_.pollEvent(ev))
     {
         sf::Vector2i mousePosition;
         switch (ev.type)
@@ -103,36 +103,36 @@ void Grid::ProcessInput()
         case Event::KeyPressed:
             if(ev.key.code==Keyboard::Escape)
             {
-                isExitButtonPressed=true;
+                isExitButtonPressed_=true;
             }
             break;
 
         case sf::Event::Closed:
-            rw.close();
+            rw_.close();
             break;
 
         case sf::Event::MouseButtonPressed: // clic gauche
-            mousePosition = sf::Mouse::getPosition(rw);
-            if (mousePosition.x>margeW && mousePosition.x<1360 && mousePosition.y>margeH && mousePosition.y<940)
+            mousePosition = sf::Mouse::getPosition(rw_);
+            if (mousePosition.x>margeW_ && mousePosition.x<1360 && mousePosition.y>margeH_ && mousePosition.y<940)
             {   //si on est dans la grille
-                SetFree();//on récupère la pos de la case vide
-                mousePosition.x=(mousePosition.x - margeW)/200;
-                mousePosition.y=(mousePosition.y -margeH)/200;
-                if(mousePosition.x==PosFree[1] && (mousePosition.y)+1==PosFree[0]) //case du dessous est vide
+                getFree();//on récupère la pos de la case vide
+                mousePosition.x=(mousePosition.x - margeW_)/200;
+                mousePosition.y=(mousePosition.y -margeH_)/200;
+                if(mousePosition.x==posFree_[1] && (mousePosition.y)+1==posFree_[0]) //case du dessous est vide
                 {
-                    MoveDown(mousePosition.x,mousePosition.y); //on fait baisser la case cliquée
+                    moveDown(mousePosition.x,mousePosition.y); //on fait baisser la case cliquée
                 }
-                if(mousePosition.x==PosFree[1] && (mousePosition.y)-1==PosFree[0]) //case du dessus est vide
+                if(mousePosition.x==posFree_[1] && (mousePosition.y)-1==posFree_[0]) //case du dessus est vide
                 {
-                    MoveUp(mousePosition.x,mousePosition.y); //on fait monter la case cliquée
+                    moveUp(mousePosition.x,mousePosition.y); //on fait monter la case cliquée
                 }
-                if((mousePosition.x)+1==PosFree[1] && (mousePosition.y)==PosFree[0]) //case à droite vide
+                if((mousePosition.x)+1==posFree_[1] && (mousePosition.y)==posFree_[0]) //case à droite vide
                 {
-                    MoveRight(mousePosition.x,mousePosition.y); //on fait aller à droite la case cliquée
+                    moveRight(mousePosition.x,mousePosition.y); //on fait aller à droite la case cliquée
                 }
-                if((mousePosition.x)-1==PosFree[1] && (mousePosition.y)==PosFree[0]) // case à gauche vide
+                if((mousePosition.x)-1==posFree_[1] && (mousePosition.y)==posFree_[0]) // case à gauche vide
                 {
-                    MoveLeft(mousePosition.x,mousePosition.y); // case cliquée va à gauche
+                    moveLeft(mousePosition.x,mousePosition.y); // case cliquée va à gauche
                 }
 
                 checkIsResolved();
@@ -150,45 +150,45 @@ void Grid::ProcessInput()
 
 }
 
-void Grid::Update()
+void Grid::update()
 {
     checkIsResolved();
 }
 
-void Grid::Draw()
+void Grid::draw()
 {
-    rw.clear(Color::Black);
+    rw_.clear(Color::Black);
     // Affichage de la grille
-    for (size_t i = 0; i < lines.size(); i++)
+    for (size_t i = 0; i < lines_.size(); i++)
     {
-        rw.draw(lines[i]);
+        rw_.draw(lines_[i]);
     }
     //Affichage des chiffre de la grille
-    /*puzzle[2][1].setFont(font);
-    puzzle[2][1].setPosition(500,200);
-    puzzle[2][1].setCharacterSize(100);
-    rw.draw(puzzle[2][1]);*/
+    /*puzzle_[2][1].setFont(font);
+    puzzle_[2][1].setPosition(500,200);
+    puzzle_[2][1].setCharacterSize(100);
+    rw_.draw(puzzle_[2][1]);*/
     for(unsigned int j=0;j<4;j++)
     {
         for(unsigned int k=0;k<4;k++)
         {
-            if(puzzle[j][k].getString()!="16") //si c'est 16 alors c'est la case vide donc on ne l'affiche pas
-            rw.draw(puzzle[j][k]);
+            if(puzzle_[j][k].getString()!="16") //si c'est 16 alors c'est la case vide donc on ne l'affiche pas
+            rw_.draw(puzzle_[j][k]);
         }
     }
     if(isResolved_==true)
     {
         Text win;
-        win.setFont(font);
+        win.setFont(font_);
         win.setString("WINNER WINNER CHICKEN DINNER");
         win.setCharacterSize(100);
         win.setPosition(380,20);
-        rw.draw(win);
+        rw_.draw(win);
         for(unsigned int j=0;j<4;j++)
         {
             for(unsigned int k=0;k<4;k++)
             {
-                puzzle[j][k].setFillColor(Color::Green);
+                puzzle_[j][k].setFillColor(Color::Green);
             }
         }
     }
@@ -198,104 +198,104 @@ void Grid::Draw()
         {
             for(unsigned int k=0;k<4;k++)
             {
-                puzzle[j][k].setFillColor(Color::White);
+                puzzle_[j][k].setFillColor(Color::White);
             }
         }
     } 
-    rw.display();
+    rw_.display();
 }
 
 //Pour les méthodes Move : gérer les cas des bords (impossible d'aller à gauche etc)
-void Grid::MoveUp(unsigned int x, unsigned int y) //pour faire monter la case cliquée d'un cran si la case cliquée est en dessous de la case vide
+void Grid::moveUp(unsigned int x, unsigned int y) //pour faire monter la case cliquée d'un cran si la case cliquée est en dessous de la case vide
 {
-    String CaseCliquee = puzzle[y][x].getString();
-    String CaseDuDessus = puzzle[y-1][x].getString();
-    puzzle[y][x].setString(CaseDuDessus);
-    puzzle[y-1][x].setString(CaseCliquee);
+    String CaseCliquee = puzzle_[y][x].getString();
+    String CaseDuDessus = puzzle_[y-1][x].getString();
+    puzzle_[y][x].setString(CaseDuDessus);
+    puzzle_[y-1][x].setString(CaseCliquee);
 }
 
-void Grid::MoveDown(unsigned int x, unsigned int y) //on fait baisser la case cliquée dans la case vide
+void Grid::moveDown(unsigned int x, unsigned int y) //on fait baisser la case cliquée dans la case vide
 {
-    /*int* posFree;
-    posFree=GetFree();//on récupère la position de la case vide
-    if (posFree[0]!=3)//si on est pas sur la dernière ligne du taquin alors on peut faire l'opération MoveUp
+    /*int* posFree_;
+    posFree_=GetFree();//on récupère la position de la case vide
+    if (posFree_[0]!=3)//si on est pas sur la dernière ligne du taquin alors on peut faire l'opération moveUp
     {   
-        Text temp=puzzle[x][y];//on prend la case cliquée
-        puzzle[x][y]=puzzle[x+1][y];//la case cliquée devient la case du dessous
-        puzzle[x+1][y]=temp;//la case du dessus devient la case cliquée
+        Text temp=puzzle_[x][y];//on prend la case cliquée
+        puzzle_[x][y]=puzzle_[x+1][y];//la case cliquée devient la case du dessous
+        puzzle_[x+1][y]=temp;//la case du dessus devient la case cliquée
     }*/
-    String CaseCliquee = puzzle[y][x].getString();
-    String CaseDuDessous = puzzle[y+1][x].getString();
-    puzzle[y][x].setString(CaseDuDessous);
-    puzzle[y+1][x].setString(CaseCliquee);
+    String CaseCliquee = puzzle_[y][x].getString();
+    String CaseDuDessous = puzzle_[y+1][x].getString();
+    puzzle_[y][x].setString(CaseDuDessous);
+    puzzle_[y+1][x].setString(CaseCliquee);
 }
 
-void Grid::MoveLeft(unsigned int x, unsigned int y) //case cliquée va à gauche
+void Grid::moveLeft(unsigned int x, unsigned int y) //case cliquée va à gauche
 {
-    /*int* posFree;
-    posFree=GetFree();//on récupère la position de la case vide
-    if (posFree[1]!=0) //si la case vide n'est pas sur la colonne de gauche 
+    /*int* posFree_;
+    posFree_=GetFree();//on récupère la position de la case vide
+    if (posFree_[1]!=0) //si la case vide n'est pas sur la colonne de gauche 
     {
-        Text temp=puzzle[x][y];
-        puzzle[x][y]=puzzle[x][y-1];
+        Text temp=puzzle_[x][y];
+        puzzle_[x][y]=puzzle_[x][y-1];
         puzzle[x][y-1]=temp;
     }*/
 
-    String CaseCliquee = puzzle[y][x].getString();
-    String CaseDeGauche = puzzle[y][x-1].getString();
-    puzzle[y][x].setString(CaseDeGauche);
-    puzzle[y][x-1].setString(CaseCliquee);
+    String CaseCliquee = puzzle_[y][x].getString();
+    String CaseDeGauche = puzzle_[y][x-1].getString();
+    puzzle_[y][x].setString(CaseDeGauche);
+    puzzle_[y][x-1].setString(CaseCliquee);
 }
 
-void Grid::MoveRight(unsigned int x, unsigned int y) //case cliquée va à droite
+void Grid::moveRight(unsigned int x, unsigned int y) //case cliquée va à droite
 {
-    String CaseCliquee = puzzle[y][x].getString();
-    String CaseDeDroite = puzzle[y][x+1].getString();
-    puzzle[y][x].setString(CaseDeDroite);
-    puzzle[y][x+1].setString(CaseCliquee);
+    String CaseCliquee = puzzle_[y][x].getString();
+    String CaseDeDroite = puzzle_[y][x+1].getString();
+    puzzle_[y][x].setString(CaseDeDroite);
+    puzzle_[y][x+1].setString(CaseCliquee);
 }
 
-void Grid::SetFree()
+void Grid::getFree()
 {
     for(unsigned int i=0;i<4;i++)
    {
       for(unsigned int j=0;j<4;j++)
       {
-        if(puzzle[i][j].getString()=="16")
+        if(puzzle_[i][j].getString()=="16")
         {
-            PosFree[0]=i;//y
-            PosFree[1]=j;//x
+            posFree_[0]=i;//y
+            posFree_[1]=j;//x
         }
       }
    }
 }
 
-void Grid::Shuffle()
+void Grid::shuffle()
 {
-    SetFree();
+    getFree();
     unsigned int max = 4; //nbr max-1
     srand(time(0));
     for(unsigned int i = 0; i<65535; i++) 
     {
-        SetFree();
+        getFree();
         unsigned int x=rand()%max;
         switch (x)
         {
         case 0:
-            if(PosFree[0]!=0)
-                MoveDown(PosFree[1],PosFree[0]-1);
+            if(posFree_[0]!=0)
+                moveDown(posFree_[1],posFree_[0]-1);
             break;
         case 1:
-            if(PosFree[0]!=3)
-                MoveUp(PosFree[1],PosFree[0]+1);
+            if(posFree_[0]!=3)
+                moveUp(posFree_[1],posFree_[0]+1);
             break;
         case 2:
-            if(PosFree[1]!=0)
-                MoveRight(PosFree[1]-1,PosFree[0]);
+            if(posFree_[1]!=0)
+                moveRight(posFree_[1]-1,posFree_[0]);
             break;
         case 3:
-            if(PosFree[1]!=3)
-                MoveLeft(PosFree[1]+1,PosFree[0]);
+            if(posFree_[1]!=3)
+                moveLeft(posFree_[1]+1,posFree_[0]);
             break;
         default:
             //error
@@ -304,17 +304,17 @@ void Grid::Shuffle()
     }
     
     //une fois le puzzle mélangé on ramène la case vide en bas à droite
-    SetFree();
-    while(PosFree[0]!=3)
+    getFree();
+    while(posFree_[0]!=3)
     {
-        MoveUp(PosFree[1],PosFree[0]+1);
-        SetFree();
+        moveUp(posFree_[1],posFree_[0]+1);
+        getFree();
     }
 
-    while(PosFree[1]!=3)
+    while(posFree_[1]!=3)
     {
-        MoveLeft(PosFree[1]+1,PosFree[0]);
-        SetFree();
+        moveLeft(posFree_[1]+1,posFree_[0]);
+        getFree();
     }
 }
 
@@ -327,7 +327,7 @@ void Grid::checkIsResolved()
    {
       for(unsigned int k=0;k<4;k++)
       {
-        if(puzzle[j][k].getString()==std::to_string(i)) // si case=i
+        if(puzzle_[j][k].getString()==std::to_string(i)) // si case=i
         {
             same++;
         }
@@ -352,7 +352,7 @@ int* Grid::getPuzzle()
     {
         for(unsigned int j =0;j<4;j++) // 4 premières colonnes de la première ligne
         {
-            text = puzzle[i][j].getString();
+            text = puzzle_[i][j].getString();
             savePuzzle_[(i*4)+j] = stoi(text);
         }
     }
@@ -365,14 +365,14 @@ void Grid::setPuzzle(int* sender) //On ecrase la configuration initiale avec la 
     {
         for(unsigned int j = 0; j<4;j++)
         {
-             puzzle[i][j].setString(std::to_string(sender[(i*4)+j]));
+             puzzle_[i][j].setString(std::to_string(sender[(i*4)+j]));
         }
     }
 }
 
 bool Grid::isInMenu()
 {
-    if(isExitButtonPressed)
+    if(isExitButtonPressed_)
     {
         return true;
     }

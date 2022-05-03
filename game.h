@@ -6,24 +6,24 @@ using namespace std;
 
 class Game
 {
-    unsigned int height = 1920;
-    unsigned width = 1080;
+    unsigned int height_ = 1920;
+    unsigned width_ = 1080;
     RenderWindow window_;
     MainMenu * mainMenu_;
-    Grid * grid;
+    Grid * grid_;
 
-    ofstream ofs;
-    ifstream ifs;
-    int* sender;
+    ofstream ofs_;
+    ifstream ifs_;
+    int* sender_;
 
-    bool isInMenu=true;//au lancement du jeu, on est dans le menu
+    bool isInMenu_=true;//au lancement du jeu, on est dans le menu
 
     Music music_;
 
 public:
     Game();
     ~Game();
-    void CheckIsInMenu();
+    void checkIsInMenu();
     void run();
     void save();
     void charge();
