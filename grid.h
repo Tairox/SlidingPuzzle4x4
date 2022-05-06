@@ -8,7 +8,12 @@ class Grid : public State
 {
 private:
     Font font_;
+    Font fontClock_;
     Text puzzle_[4][4];//on utilise sf::Text car si on utilise unsigned int on ne pourra pas l'afficher
+    Clock clock_; //chrono
+    Time elapsed; //Temps depuis le lancement de la clock
+    unsigned int seconds_; //secondes de la session d'avant (à restaurer via sauvegarde)
+    unsigned int minutes_;
     int* posFree_;
     std::vector<RectangleShape> lines_; // lignes de la grille (à la fois horizontales et verticales)
     //bool isInMenu_=true; pas  utile c dans game mtn il nous faut une méthode checkIsInMenu
@@ -31,6 +36,7 @@ public:
     void processInput() override;
     void update() override;
     void draw() override;
+    void startClock();
     //méthodes spécifiques au puzzle_
     void shuffle();//pour mélanger le taquin (mélanger un taquin soluble fait qu'il est automatiquement soluble
     void moveUp(unsigned int x,unsigned int y);// c'est contre-intuitif : x et y sont inversés (x en abscisse et y en ord)

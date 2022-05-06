@@ -22,6 +22,10 @@ void Grid::init()
 	{
 		// handle error
 	}
+    if(!fontClock_.loadFromFile("font/digital-7.ttf"))
+    {
+        //error
+    }
     
     unsigned int width_=rw_.getSize().x; // ici 1920
     unsigned int height_=rw_.getSize().y; //ici 1080
@@ -176,7 +180,7 @@ void Grid::draw()
             rw_.draw(puzzle_[j][k]);
         }
     }
-    if(isResolved_==true)
+    if(isResolved_)
     {
         Text win;
         win.setFont(font_);
@@ -202,6 +206,33 @@ void Grid::draw()
             }
         }
     } 
+
+    Text chrono;
+    chrono.setFont(fontClock_);
+    Time elapsed = clock_.getElapsedTime();
+    if(!isResolved_)
+    {
+        minutes_ = elapsed.asSeconds()/60;
+        seconds_ = elapsed.asSeconds()-60*minutes_;
+    }
+    else
+    {
+        clock_.restart();
+    }
+    string secondsString;
+    if(seconds_<10)
+    {
+        secondsString="0"+std::to_string(seconds_);
+    }
+    else
+    {
+        secondsString=std::to_string(seconds_);
+    }
+    string minutesString =std::to_string(minutes_);
+    chrono.setString(minutesString+":"+secondsString);
+    chrono.setPosition(200,120);
+    chrono.setCharacterSize(175);
+    rw_.draw(chrono);
     rw_.display();
 }
 
@@ -380,4 +411,10 @@ bool Grid::isInMenu()
     {
         return false;
     }
+}
+
+void Grid::startClock()
+{
+    clock_.restart();//remet la clock à 0
+    elapsed.Zero;
 }

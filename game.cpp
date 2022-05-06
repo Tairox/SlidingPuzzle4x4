@@ -30,7 +30,7 @@ void Game::run()
 {
     while(window_.isOpen())
     {
-        if(isInMenu_==true)
+        if(isInMenu_)
         {
             checkIsInMenu();
             mainMenu_->processInput();
@@ -53,8 +53,6 @@ void Game::run()
             grid_->processInput();
             grid_->update();
             grid_->draw();
-
-            
         }
 	}
 }
@@ -71,6 +69,10 @@ void Game::checkIsInMenu()
     if(isInMenu_)
     {
         isInMenu_=mainMenu_->isInMenu();
+        if(!isInMenu_)//si on sort du menu
+        {
+            grid_->startClock();//on met la clock à 0
+        }
     }
     else
     {
