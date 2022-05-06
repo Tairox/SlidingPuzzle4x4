@@ -11,8 +11,8 @@ Grid::Grid(RenderWindow &RW) : rw_(RW) //L'opérateur = n'existe pas pour la cla
 
 Grid::~Grid()
 {
-    // ? delete posFree_;
-    // ? delete savePuzzle_;
+    delete posFree_;
+    delete savePuzzle_;
 }
 
 void Grid::init()
