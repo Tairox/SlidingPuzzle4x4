@@ -97,6 +97,10 @@ void Grid::init()
     {
         lines_[i].setFillColor(sf::Color::White);
     }
+
+    chrono.setFont(fontClock_);
+    chrono.setPosition(200,120);
+    chrono.setCharacterSize(175);
 }
 
 void Grid::processInput()
@@ -163,6 +167,27 @@ void Grid::processInput()
 void Grid::update()
 {
     checkIsResolved();
+    Time elapsed = clock_.getElapsedTime();
+    if(!isResolved_)
+    {
+        minutes_ = elapsed.asSeconds()/60;
+        seconds_ = elapsed.asSeconds()-60*minutes_;
+    }
+    else
+    {
+        clock_.restart();
+    }
+    string secondsString;
+    if(seconds_<10)
+    {
+        secondsString="0"+std::to_string(seconds_);
+    }
+    else
+    {
+        secondsString=std::to_string(seconds_);
+    }
+    string minutesString =std::to_string(minutes_);
+    chrono.setString(minutesString+":"+secondsString);
 }
 
 void Grid::draw()
@@ -214,31 +239,6 @@ void Grid::draw()
         }
     } 
 
-    Text chrono;
-    chrono.setFont(fontClock_);
-    Time elapsed = clock_.getElapsedTime();
-    if(!isResolved_)
-    {
-        minutes_ = elapsed.asSeconds()/60;
-        seconds_ = elapsed.asSeconds()-60*minutes_;
-    }
-    else
-    {
-        clock_.restart();
-    }
-    string secondsString;
-    if(seconds_<10)
-    {
-        secondsString="0"+std::to_string(seconds_);
-    }
-    else
-    {
-        secondsString=std::to_string(seconds_);
-    }
-    string minutesString =std::to_string(minutes_);
-    chrono.setString(minutesString+":"+secondsString);
-    chrono.setPosition(200,120);
-    chrono.setCharacterSize(175);
     rw_.draw(chrono);
     rw_.display();
 }
@@ -423,5 +423,5 @@ bool Grid::isInMenu()
 void Grid::startClock()
 {
     clock_.restart();//remet la clock à 0
-    elapsed.Zero;
+    //elapsed.Zero;
 }
