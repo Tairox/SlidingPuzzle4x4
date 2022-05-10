@@ -52,8 +52,8 @@ void Game::run()
             checkIsInMenu();
             grid_->processInput();
             grid_->update();
-            save(); //auto save
             grid_->draw();
+            save(); //auto save
         }
 	}
 }
@@ -87,7 +87,7 @@ void Game::save()
     ofs_.open("save/save.txt"); //Ouverture du fichier de sauvegarde dans ofs_.
     if(!ofs_.is_open())
     {
-        //Handle error
+        cerr<<"Impossible d'ouvrir la sauvegarde"<<endl;
     }
     else
     {
@@ -97,12 +97,13 @@ void Game::save()
         }
         if(!ofs_.good())
         {
-            cout<<"Erreur d'écriture"<<endl;
+            cerr<<"Erreur d'écriture"<<endl;
         }
         else
         {
-            cout<<"Enregistrement réussis"<<endl;
+            cout<<"Enregistrement réussi"<<endl;
         }
+        ofs_.close();
     }
     //delete grid_->getPuzzle(); // Bien penser à supprimer le pointeur de grid_
 }
@@ -124,12 +125,13 @@ void Game::charge()
         }
         if(!ifs_.good())
         {
-            cout<<"Erreur de lecture"<<endl;
+            cerr<<"Erreur de lecture"<<endl;
         }
         else
         {
             cout<<"Lecture terminée"<<endl;
             grid_->setPuzzle(sender_);
         }
+        ifs_.close();
     }
 }

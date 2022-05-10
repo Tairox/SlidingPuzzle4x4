@@ -27,7 +27,7 @@ void Grid::init()
         //error
     }
 
-    if(!bg_texture_.loadFromFile("img/background.png"))
+    if(!bg_texture_.loadFromFile("img/img_grid/img_grid.png"))
 	{
 		//Handle error
 	}
@@ -70,11 +70,11 @@ void Grid::init()
     soundWin_.setBuffer(bufferWin_);
 
     // création de 5 lignes verticales |
-    for (unsigned int i = 0; i < 5; i++)
+    for (unsigned int i = 0; i < 4; i++)
     {
         lines_.push_back(RectangleShape(Vector2f(6, sizeLine)));
     }
-
+    lines_.push_back(RectangleShape(Vector2f(6, sizeLine+6))); //la dernière ligne verticale doit être + longue car elle n'est pas recouverte par une ligne verticale
     // 5 lignes horizontales —
     for (unsigned int i = 0; i < 5; i++)
     {
