@@ -29,6 +29,9 @@ private:
     SoundBuffer bufferWin_;
     Sound soundWin_;
 
+    Texture bg_texture_;
+    Sprite bg_sprite_;
+
 public:
     Grid(RenderWindow &);
     ~Grid();

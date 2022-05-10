@@ -26,6 +26,12 @@ void Grid::init()
     {
         //error
     }
+
+    if(!bg_texture_.loadFromFile("img/background.png"))
+	{
+		//Handle error
+	}
+    bg_sprite_.setTexture(bg_texture_);
     
     unsigned int width_=rw_.getSize().x; // ici 1920
     unsigned int height_=rw_.getSize().y; //ici 1080
@@ -162,6 +168,7 @@ void Grid::update()
 void Grid::draw()
 {
     rw_.clear(Color::Black);
+    rw_.draw(bg_sprite_);
     // Affichage de la grille
     for (size_t i = 0; i < lines_.size(); i++)
     {
