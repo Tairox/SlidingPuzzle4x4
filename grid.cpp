@@ -29,10 +29,9 @@ void Grid::init()
 
     //Chargement de l'image de fond dans une banque d'images
     srand(time(0));
-    unsigned int x=rand()%3;
-    char buffer[100];
-    sprintf(buffer,"img/grid_backgrounds/%d.jpg",x);
-    if(!bg_texture_.loadFromFile(buffer))
+    unsigned int x=rand()%5;
+    string path_background="img/grid_background/"+to_string(x)+".png";
+    if(!bg_texture_.loadFromFile(path_background))
 	{
 		//Handle error
 	}

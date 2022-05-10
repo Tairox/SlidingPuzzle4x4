@@ -1,11 +1,12 @@
 *
 !music
-!save
+!savegame
+!*.txt
 !*.cpp
 !*.h
 !img
 !*.jpg
-!img/grid_backgrounds
+!img/grid_background
 !*.png
 !sound
 !*.wav
@@ -13,4 +14,3 @@
 !*.ttf
 !*.otf
 !openal32.dll
-save/save.txt
