@@ -5,6 +5,7 @@
 !*.h
 !img
 !*.jpg
+!img/grid_backgrounds
 !*.png
 !sound
 !*.wav
