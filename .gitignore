@@ -1,6 +1,7 @@
 *
 !music
 !save
+!*.txt
 !*.cpp
 !*.h
 !img
