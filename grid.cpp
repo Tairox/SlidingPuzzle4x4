@@ -27,8 +27,8 @@ void Grid::init()
         //error
     }
     
-    //Chargement de l'image de fond dans une banque d'images
     srand(time(0)); //génération de la seed pour l'aléatoire
+    //Chargement de l'image de fond dans une banque d'images
     changeBackground();// charge une image de fond
 
     unsigned int width_=rw_.getSize().x; // ici 1920
@@ -309,7 +309,6 @@ void Grid::shuffle()
 {
     getFree();
     unsigned int max = 4; //nbr max-1
-    srand(time(0));
     for(unsigned int i = 0; i<65535; i++) 
     {
         getFree();
