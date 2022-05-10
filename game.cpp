@@ -42,6 +42,7 @@ void Game::run()
             if(mainMenu_->isNewGamePressed())
             {
                 grid_->shuffle();
+                grid_->changeBackground();
             }
 
             mainMenu_->update();
@@ -84,7 +85,7 @@ void Game::checkIsInMenu()
 void Game::save()
 {
     // Sauvegarde à la fermeture de l'application :
-    ofs_.open("savegame/save.txt"); //Ouverture du fichier de sauvegarde dans ofs_.
+    ofs_.open("save/save.txt"); //Ouverture du fichier de sauvegarde dans ofs_.
     if(!ofs_.is_open())
     {
         cerr<<"Impossible d'ouvrir la sauvegarde"<<endl;
@@ -112,7 +113,7 @@ void Game::charge()
 {
     sender_ = new int[16];
 
-    ifs_.open("savegame/save.txt");
+    ifs_.open("save/save.txt");
     if(!ifs_.is_open())
     {
         cout<<"Erreur d'ouverture"<<endl;

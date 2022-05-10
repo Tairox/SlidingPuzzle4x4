@@ -26,22 +26,15 @@ void Grid::init()
     {
         //error
     }
-
-    //Chargement de l'image de fond dans une banque d'images
-    srand(time(0));
-    unsigned int x=rand()%5;
-    string path_background="img/grid_background/"+to_string(x)+".png";
-    if(!bg_texture_.loadFromFile(path_background))
-	{
-		//Handle error
-	}
-    bg_sprite_.setTexture(bg_texture_);
     
+    //Chargement de l'image de fond dans une banque d'images
+    srand(time(0)); //génération de la seed pour l'aléatoire
+    changeBackground();// charge une image de fond
+
     unsigned int width_=rw_.getSize().x; // ici 1920
     unsigned int height_=rw_.getSize().y; //ici 1080
     unsigned int sizeLine=(width_-margeW_)-(0+margeW_);// ici 1920-560 - 560 =  1360 - 560 = 800, on aura donc des traits de 800px de long
     unsigned int gap = sizeLine /4; //car on dessine 4 traits après le premier donc 800/4=200
-    
     //création du puzzle (1,2,3,4,...,16) on consid-re 16 la case vide
     unsigned int i=1;
     for(unsigned int j=0;j<4;j++)
@@ -428,4 +421,15 @@ void Grid::startClock()
 {
     clock_.restart();//remet la clock à 0
     //elapsed.Zero;
+}
+
+void Grid::changeBackground()
+{
+    unsigned int x=rand()%5;
+    string path_background="img/grid_background/"+to_string(x)+".png";
+    if(!bg_texture_.loadFromFile(path_background))
+	{
+		//Handle error
+	}
+    bg_sprite_.setTexture(bg_texture_);
 }

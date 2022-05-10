@@ -52,4 +52,5 @@ public:
     int* getPuzzle();
     void setPuzzle(int*);
     bool isInMenu();
+    void changeBackground();
     };
