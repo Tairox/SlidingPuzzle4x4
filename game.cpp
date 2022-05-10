@@ -52,6 +52,7 @@ void Game::run()
             checkIsInMenu();
             grid_->processInput();
             grid_->update();
+            save(); //auto save
             grid_->draw();
         }
 	}
