@@ -2,17 +2,24 @@
 
 Game::Game()
 {
+    //Création de la fenêtre
     window_.create(VideoMode(height_, width_), "Sliding Puzzle", Style::Default);
     window_.setFramerateLimit(60);
 
+    //Mise en place de l'icone
     Image icon;
 	if(!icon.loadFromFile("img/icon.png"))
 	{
-		//error
+		//Handle error
 	}
 	window_.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr()); //permet de définir l'icône de la fenêtre à partir d'un sf::Image
 
-     if (!music_.openFromFile("music/MainMenuMusic.wav"))
+    //Choix de la musique de manière aléatoire
+    srand(time(0));
+    unsigned int x=rand()%5;
+    string path_music="music/game_music_"+to_string(x)+".wav";
+
+     if (!music_.openFromFile(path_music))
     {
         //Handle error
     }
@@ -20,6 +27,7 @@ Game::Game()
     music_.setLoop(true);
     music_.play();
 
+    //Construction et initialisation du menu et de la grille
     mainMenu_ = new MainMenu(window_);
     mainMenu_->init();
     grid_ = new Grid(window_);
@@ -54,7 +62,7 @@ void Game::run()
             grid_->processInput();
             grid_->update();
             grid_->draw();
-            save(); //auto save
+            save(); //Sauvegarde automatique
         }
 	}
 }
@@ -84,7 +92,6 @@ void Game::checkIsInMenu()
 
 void Game::save()
 {
-    // Sauvegarde à la fermeture de l'application :
     ofs_.open("save/save.txt"); //Ouverture du fichier de sauvegarde dans ofs_.
     if(!ofs_.is_open())
     {
@@ -106,7 +113,6 @@ void Game::save()
         }
         ofs_.close();
     }
-    //delete grid_->getPuzzle(); // Bien penser à supprimer le pointeur de grid_
 }
 
 void Game::charge()
