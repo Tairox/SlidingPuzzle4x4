@@ -11,8 +11,8 @@ private:
     Font fontClock_;
     Text puzzle_[4][4];//on utilise sf::Text car si on utilise unsigned int on ne pourra pas l'afficher
     Clock clock_; //chrono
-    Time elapsed; //Temps depuis le lancement de la clock
-    Text chrono;
+    Time elapsed_; //Temps depuis le lancement de la clock
+    Text chrono_;
     unsigned int seconds_; //secondes de la session d'avant (à restaurer via sauvegarde)
     unsigned int minutes_;
     int* posFree_;

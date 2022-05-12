@@ -95,9 +95,9 @@ void Grid::init()
         lines_[i].setFillColor(sf::Color::White);
     }
 
-    chrono.setFont(fontClock_);
-    chrono.setPosition(200,120);
-    chrono.setCharacterSize(175);
+    chrono_.setFont(fontClock_);
+    chrono_.setPosition(200,120);
+    chrono_.setCharacterSize(175);
 }
 
 void Grid::processInput()
@@ -164,11 +164,11 @@ void Grid::processInput()
 void Grid::update()
 {
     checkIsResolved();
-    Time elapsed = clock_.getElapsedTime();
+    Time elapsed_ = clock_.getElapsedTime();
     if(!isResolved_)
     {
-        minutes_ = elapsed.asSeconds()/60;
-        seconds_ = elapsed.asSeconds()-60*minutes_;
+        minutes_ = elapsed_.asSeconds()/60;
+        seconds_ = elapsed_.asSeconds()-60*minutes_;
     }
     else
     {
@@ -184,7 +184,7 @@ void Grid::update()
         secondsString=std::to_string(seconds_);
     }
     string minutesString =std::to_string(minutes_);
-    chrono.setString(minutesString+":"+secondsString);
+    chrono_.setString(minutesString+":"+secondsString);
 }
 
 void Grid::draw()
@@ -236,7 +236,7 @@ void Grid::draw()
         }
     } 
 
-    rw_.draw(chrono);
+    rw_.draw(chrono_);
     rw_.display();
 }
 
@@ -419,7 +419,7 @@ bool Grid::isInMenu()
 void Grid::startClock()
 {
     clock_.restart();//remet la clock à 0
-    //elapsed.Zero;
+    //elapsed_.Zero;
 }
 
 void Grid::changeBackground()

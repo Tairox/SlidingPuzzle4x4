@@ -16,10 +16,10 @@ Game::Game()
 
     //Choix de la musique de manière aléatoire
     srand(time(0));
-    unsigned int x=rand()%5;
+    unsigned int x=rand()%6;
     string path_music="music/game_music_"+to_string(x)+".wav";
 
-     if (!music_.openFromFile(path_music))
+    if (!music_.openFromFile(path_music))
     {
         //Handle error
     }
