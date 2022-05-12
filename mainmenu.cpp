@@ -70,23 +70,21 @@ void MainMenu::processInput()
     sf::Vector2i mousePosition;//position souris
     mousePosition=sf::Mouse::getPosition(rw_);
     unsigned int oldSelectedIndex=selectedIndex_;
-    if(mousePosition.x<1260 && mousePosition.x>700) // on est au centre de la fenêtre (la colonne où il y a les boutons)
+
+    if(text_[0].getGlobalBounds().contains(rw_.mapPixelToCoords((mousePosition))))
     {
-        if(mousePosition.y>280 && mousePosition.y<420)
+        selectedIndex_=0;
+    }
+    else
+    {
+        if(text_[1].getGlobalBounds().contains(rw_.mapPixelToCoords((mousePosition))))
         {
-            selectedIndex_=0;
+            selectedIndex_=1;
         }
         else
+        if(text_[2].getGlobalBounds().contains(rw_.mapPixelToCoords((mousePosition))))
         {
-            if(mousePosition.y>530 && mousePosition.y<670)
-            {
-                selectedIndex_=1;
-            }
-            else
-            if(mousePosition.y>800 && mousePosition.y<940)
-            {
-                selectedIndex_=2;
-            }
+            selectedIndex_=2;
         }
     }
     if(oldSelectedIndex!=selectedIndex_)
