@@ -82,9 +82,11 @@ void MainMenu::processInput()
             selectedIndex_=1;
         }
         else
-        if(text_[2].getGlobalBounds().contains(rw_.mapPixelToCoords((mousePosition))))
         {
-            selectedIndex_=2;
+            if(text_[2].getGlobalBounds().contains(rw_.mapPixelToCoords((mousePosition))))
+            {
+                selectedIndex_=2;
+            }
         }
     }
     if(oldSelectedIndex!=selectedIndex_)
