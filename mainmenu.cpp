@@ -67,6 +67,33 @@ void MainMenu::init()
 
 void MainMenu::processInput()
 {
+    sf::Vector2i mousePosition;//position souris
+    mousePosition=sf::Mouse::getPosition(rw_);
+    unsigned int oldSelectedIndex=selectedIndex_;
+    if(mousePosition.x<1260 && mousePosition.x>700) // on est au centre de la fenêtre (la colonne où il y a les boutons)
+    {
+        if(mousePosition.y>280 && mousePosition.y<420)
+        {
+            selectedIndex_=0;
+        }
+        else
+        {
+            if(mousePosition.y>530 && mousePosition.y<670)
+            {
+                selectedIndex_=1;
+            }
+            else
+            if(mousePosition.y>800 && mousePosition.y<940)
+            {
+                selectedIndex_=2;
+            }
+        }
+    }
+    if(oldSelectedIndex!=selectedIndex_)
+    {
+        soundSelect_.play();
+    }
+
     Event ev;
     
     isExitButtonPressed_=false;
@@ -76,6 +103,25 @@ void MainMenu::processInput()
     {
         switch (ev.type)
         {
+        case Event::MouseButtonPressed: //clic gauche
+            switch (selectedIndex_)
+                {
+                case 0:
+                    isPlayButtonPressed_ = true;
+                    soundEnter_.play();
+                    break;
+                case 1:
+                    isNewGameButtonPressed_ = true;
+                    soundEnter_.play();
+                    break;
+                case 2:
+                    isExitButtonPressed_ = true;
+                    soundEnter_.play();
+                    break;
+                default: //dans les autres cas on ne fait rien
+                    break;
+                }
+            break;
         case Event::KeyPressed:
             switch (ev.key.code)
             {
