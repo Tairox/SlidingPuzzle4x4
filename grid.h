@@ -10,6 +10,7 @@ private:
     Font font_;
     Font fontClock_;
     Text puzzle_[4][4];//on utilise sf::Text car si on utilise unsigned int on ne pourra pas l'afficher
+    Sprite imgGrid[4][4];
     Clock clock_; //chrono
     Time elapsed_; //Temps depuis le lancement de la clock
     Text chrono_;

@@ -44,6 +44,10 @@ void Grid::init()
         if(isGridSet_==false)
         {
             puzzle_[j][k].setString(std::to_string(i)); // on convertit l'int i en string "i"
+
+            imgGrid[j][k].setTexture(bg_texture_);
+            imgGrid[j][k].setTextureRect(IntRect(margeW_+200*k,margeH_+200*j,200,200));
+            imgGrid[j][k].setPosition(margeW_+200*k,margeH_+200*j);
         }
         puzzle_[j][k].setFont(font_); // on définit la police de tout les éléments
         puzzle_[j][k].setCharacterSize(150);
@@ -185,32 +189,24 @@ void Grid::update()
     }
     string minutesString =std::to_string(minutes_);
     chrono_.setString(minutesString+":"+secondsString);
+
+    for (unsigned int j = 0; j < 4; j++)
+    {
+        for (unsigned int k = 0; k < 4; k++)
+        {
+            imgGrid[j][k].setPosition((margeW_+200*k)+6,(margeH_+200*j)+6);
+        }
+        
+    }
 }
 
 void Grid::draw()
 {
     rw_.clear(Color::Black);
-    rw_.draw(bg_sprite_);
-    // Affichage de la grille
-    for (size_t i = 0; i < lines_.size(); i++)
-    {
-        rw_.draw(lines_[i]);
-    }
-    //Affichage des chiffre de la grille
-    /*puzzle_[2][1].setFont(font);
-    puzzle_[2][1].setPosition(500,200);
-    puzzle_[2][1].setCharacterSize(100);
-    rw_.draw(puzzle_[2][1]);*/
-    for(unsigned int j=0;j<4;j++)
-    {
-        for(unsigned int k=0;k<4;k++)
-        {
-            if(puzzle_[j][k].getString()!="16") //si c'est 16 alors c'est la case vide donc on ne l'affiche pas
-            rw_.draw(puzzle_[j][k]);
-        }
-    }
+    //rw_.draw(bg_sprite_);
     if(isResolved_)
     {
+        rw_.draw(bg_sprite_);// on la dessine une deuxième fois pour avoir 100% de luminosité
         Text win;
         win.setFont(font_);
         win.setString("WINNER WINNER CHICKEN DINNER");
@@ -234,8 +230,24 @@ void Grid::draw()
                 puzzle_[j][k].setFillColor(Color::White);
             }
         }
-    } 
-
+    }
+    // Affichage de la grille
+    for (size_t i = 0; i < lines_.size(); i++)
+    {
+        rw_.draw(lines_[i]);
+    }
+    //Affichage des chiffre de la grille
+    for(unsigned int j=0;j<4;j++)
+    {
+        for(unsigned int k=0;k<4;k++)
+        {
+            if(puzzle_[j][k].getString()!="16") //si c'est 16 alors c'est la case vide donc on ne l'affiche pas
+            {
+                rw_.draw(imgGrid[j][k]);
+                rw_.draw(puzzle_[j][k]);
+            }
+        }
+    }
     rw_.draw(chrono_);
     rw_.display();
 }
@@ -247,6 +259,11 @@ void Grid::moveUp(unsigned int x, unsigned int y) //pour faire monter la case cl
     String CaseDuDessus = puzzle_[y-1][x].getString();
     puzzle_[y][x].setString(CaseDuDessus);
     puzzle_[y-1][x].setString(CaseCliquee);
+
+    Sprite caseClic = imgGrid[y][x];
+    imgGrid[y][x]=imgGrid[y-1][x];
+    imgGrid[y-1][x]=caseClic;
+
 }
 
 void Grid::moveDown(unsigned int x, unsigned int y) //on fait baisser la case cliquée dans la case vide
@@ -263,6 +280,11 @@ void Grid::moveDown(unsigned int x, unsigned int y) //on fait baisser la case cl
     String CaseDuDessous = puzzle_[y+1][x].getString();
     puzzle_[y][x].setString(CaseDuDessous);
     puzzle_[y+1][x].setString(CaseCliquee);
+
+    Sprite caseClic = imgGrid[y][x];
+    imgGrid[y][x]=imgGrid[y+1][x];
+    imgGrid[y+1][x]=caseClic;
+    
 }
 
 void Grid::moveLeft(unsigned int x, unsigned int y) //case cliquée va à gauche
@@ -280,6 +302,10 @@ void Grid::moveLeft(unsigned int x, unsigned int y) //case cliquée va à gauche
     String CaseDeGauche = puzzle_[y][x-1].getString();
     puzzle_[y][x].setString(CaseDeGauche);
     puzzle_[y][x-1].setString(CaseCliquee);
+
+    Sprite caseClic = imgGrid[y][x];
+    imgGrid[y][x]=imgGrid[y][x-1];
+    imgGrid[y][x-1]=caseClic;
 }
 
 void Grid::moveRight(unsigned int x, unsigned int y) //case cliquée va à droite
@@ -288,6 +314,10 @@ void Grid::moveRight(unsigned int x, unsigned int y) //case cliquée va à droit
     String CaseDeDroite = puzzle_[y][x+1].getString();
     puzzle_[y][x].setString(CaseDeDroite);
     puzzle_[y][x+1].setString(CaseCliquee);
+
+    Sprite caseClic = imgGrid[y][x];
+    imgGrid[y][x]=imgGrid[y][x+1];
+    imgGrid[y][x+1]=caseClic;
 }
 
 void Grid::getFree()
@@ -400,6 +430,11 @@ void Grid::setPuzzle(int* sender) //On ecrase la configuration initiale avec la 
         for(unsigned int j = 0; j<4;j++)
         {
              puzzle_[i][j].setString(std::to_string(sender[(i*4)+j]));
+             int val= sender[(i*4)+j];
+             int ligne=(val-1)/4;
+             int colonne=((val-1)%4);
+            imgGrid[i][j].setTexture(bg_texture_);
+            imgGrid[i][j].setTextureRect(IntRect((margeW_+200*colonne)+6,(margeH_+200*ligne)+6,194,194)); //194 pour ne pas écrire sur les 6 de marge
         }
     }
 }
