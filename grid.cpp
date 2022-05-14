@@ -429,10 +429,10 @@ void Grid::setPuzzle(int* sender) //On ecrase la configuration initiale avec la 
     {
         for(unsigned int j = 0; j<4;j++)
         {
-             puzzle_[i][j].setString(std::to_string(sender[(i*4)+j]));
-             int val= sender[(i*4)+j];
-             int ligne=(val-1)/4;
-             int colonne=((val-1)%4);
+            puzzle_[i][j].setString(std::to_string(sender[(i*4)+j]));
+            int val= sender[(i*4)+j];
+            int ligne=(val-1)/4;
+            int colonne=((val-1)%4);
             imgGrid[i][j].setTexture(bg_texture_);
             imgGrid[i][j].setTextureRect(IntRect((margeW_+200*colonne)+6,(margeH_+200*ligne)+6,194,194)); //194 pour ne pas écrire sur les 6 de marge
         }
@@ -459,7 +459,7 @@ void Grid::startClock()
 
 void Grid::changeBackground()
 {
-    unsigned int x=rand()%5;
+    unsigned int x=rand()%8;
     string path_background="img/grid_background/"+to_string(x)+".png";
     if(!bg_texture_.loadFromFile(path_background))
 	{
