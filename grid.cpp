@@ -46,7 +46,7 @@ void Grid::init()
             puzzle_[j][k].setString(std::to_string(i)); // on convertit l'int i en string "i"
 
             imgGrid[j][k].setTexture(bg_texture_);
-            imgGrid[j][k].setTextureRect(IntRect(margeW_+200*k,margeH_+200*j,200,200));
+            imgGrid[j][k].setTextureRect(IntRect(margeW_+206*k,margeH_+206*j,194,194));
             imgGrid[j][k].setPosition(margeW_+200*k,margeH_+200*j);
         }
         puzzle_[j][k].setFont(font_); // on définit la police de tout les éléments
