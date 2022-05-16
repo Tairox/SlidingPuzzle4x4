@@ -231,4 +231,3 @@ bool MainMenu::isInMenu()
     else
     {return true;}
 }
-

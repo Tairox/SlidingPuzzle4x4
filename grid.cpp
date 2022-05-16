@@ -56,7 +56,7 @@ void Grid::init()
         i++;
       }
    }
-   if(isGridSet_==false)
+   if(!isGridSet_)
    {
        posFree_ = new int[2];
        getFree();
