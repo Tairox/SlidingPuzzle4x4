@@ -102,6 +102,12 @@ void Grid::init()
     chrono_.setFont(fontClock_);
     chrono_.setPosition(200,120);
     chrono_.setCharacterSize(175);
+
+    restartButton_.setFont(font_);
+    restartButton_.setFillColor(Color::White);
+    restartButton_.setPosition(1400,120);
+    restartButton_.setCharacterSize(175);
+    restartButton_.setString("Restart");
 }
 
 void Grid::processInput()
@@ -128,6 +134,10 @@ void Grid::processInput()
 
         case sf::Event::MouseButtonPressed: // clic gauche
             mousePosition = sf::Mouse::getPosition(rw_);
+            if(restartButton_.getGlobalBounds().contains(rw_.mapPixelToCoords((mousePosition))) && isResolved_)
+            {
+                shuffle();
+            }
             if (mousePosition.x>margeW_ && mousePosition.x<1360 && mousePosition.y>margeH_ && mousePosition.y<940)
             {   //si on est dans la grille
                 getFree();//on récupère la pos de la case vide
@@ -220,6 +230,7 @@ void Grid::draw()
                 puzzle_[j][k].setFillColor(Color::Green);
             }
         }
+        rw_.draw(restartButton_);
     }
     else
     {
