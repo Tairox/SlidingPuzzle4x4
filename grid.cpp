@@ -134,9 +134,11 @@ void Grid::processInput()
 
         case sf::Event::MouseButtonPressed: // clic gauche
             mousePosition = sf::Mouse::getPosition(rw_);
-            if(restartButton_.getGlobalBounds().contains(rw_.mapPixelToCoords((mousePosition))) && isResolved_)
+            if(restartButton_.getGlobalBounds().contains(rw_.mapPixelToCoords((mousePosition))))
             {
                 shuffle();
+                changeBackground();
+                clock_.restart();
             }
             if (mousePosition.x>margeW_ && mousePosition.x<1360 && mousePosition.y>margeH_ && mousePosition.y<940)
             {   //si on est dans la grille
@@ -230,7 +232,6 @@ void Grid::draw()
                 puzzle_[j][k].setFillColor(Color::Green);
             }
         }
-        rw_.draw(restartButton_);
     }
     else
     {
@@ -260,6 +261,7 @@ void Grid::draw()
         }
     }
     rw_.draw(chrono_);
+    rw_.draw(restartButton_);
     rw_.display();
 }
 
@@ -399,24 +401,24 @@ void Grid::checkIsResolved()
     unsigned int same=0;
     unsigned int i=1;
     for(unsigned int j=0;j<4;j++)
-   {
-      for(unsigned int k=0;k<4;k++)
-      {
+    {
+        for(unsigned int k=0;k<4;k++)
+        {
         if(puzzle_[j][k].getString()==std::to_string(i)) // si case=i
         {
             same++;
         }
         i++;
-      }
-   }
-   if(same==16) //si toutes les cases sont dans le bon ordre
-   {
-       isResolved_=true;
-   }
-   else
-   {
-       isResolved_=false;
-   }
+        }
+    }
+    if(same==16) //si toutes les cases sont dans le bon ordre
+    {
+        isResolved_=true;
+    }
+    else
+    {
+        isResolved_=false;
+    }
 }
 
 int* Grid::getPuzzle()
@@ -470,11 +472,16 @@ void Grid::startClock()
 
 void Grid::changeBackground()
 {
-    unsigned int x=rand()%8;
-    string path_background="img/grid_background/"+to_string(x)+".png";
+    unsigned int x;
+    do
+    {
+        x=rand()%8;
+    } while (x==indiceImage_);
+    indiceImage_=x;
+    string path_background="img/grid_background/"+to_string(indiceImage_)+".png";
     if(!bg_texture_.loadFromFile(path_background))
 	{
-		//Handle error
+		//cerr error ?
 	}
     bg_sprite_.setTexture(bg_texture_);
 }

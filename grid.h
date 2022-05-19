@@ -18,6 +18,7 @@ private:
     unsigned int seconds_; //secondes de la session d'avant (à restaurer via sauvegarde)
     unsigned int minutes_;
     int* posFree_;
+    unsigned int indiceImage_;
     std::vector<RectangleShape> lines_; // lignes de la grille (à la fois horizontales et verticales)
     //bool isInMenu_=true; pas  utile c dans game mtn il nous faut une méthode checkIsInMenu
     RenderWindow & rw_;
