@@ -63,6 +63,7 @@ void Grid::init()
        shuffle();
    }
     isGridSet_=true;
+    savePuzzle_ = new int [16];
 
     if (!bufferWin_.loadFromFile("sound/SIUU.wav"))
     {
@@ -108,6 +109,12 @@ void Grid::init()
     restartButton_.setPosition(1400,120);
     restartButton_.setCharacterSize(175);
     restartButton_.setString("Restart");
+
+    backToMenuButton_.setFont(font_);
+    backToMenuButton_.setFillColor(Color::White);
+    backToMenuButton_.setPosition(80,20);
+    backToMenuButton_.setCharacterSize(85);
+    backToMenuButton_.setString("Back to menu");
 }
 
 void Grid::processInput()
@@ -139,6 +146,10 @@ void Grid::processInput()
                 shuffle();
                 changeBackground();
                 clock_.restart();
+            }
+            if(backToMenuButton_.getGlobalBounds().contains(rw_.mapPixelToCoords((mousePosition))))
+            {
+                isExitButtonPressed_=true;
             }
             if (mousePosition.x>margeW_ && mousePosition.x<1360 && mousePosition.y>margeH_ && mousePosition.y<940)
             {   //si on est dans la grille
@@ -218,6 +229,7 @@ void Grid::draw()
     //rw_.draw(bg_sprite_);
     if(isResolved_)
     {
+        rw_.draw(bg_sprite_);
         rw_.draw(bg_sprite_);// on la dessine une deuxième fois pour avoir 100% de luminosité
         Text win;
         win.setFont(font_);
@@ -262,6 +274,7 @@ void Grid::draw()
     }
     rw_.draw(chrono_);
     rw_.draw(restartButton_);
+    rw_.draw(backToMenuButton_);
     rw_.display();
 }
 
@@ -423,7 +436,6 @@ void Grid::checkIsResolved()
 
 int* Grid::getPuzzle()
 {
-    savePuzzle_ = new int [16];
     string text;
     for(unsigned int i=0;i<4;i++) // 4 itérations pour les 4 lignes
     {
@@ -475,7 +487,7 @@ void Grid::changeBackground()
     unsigned int x;
     do
     {
-        x=rand()%8;
+        x=rand()%9;
     } while (x==indiceImage_);
     indiceImage_=x;
     string path_background="img/grid_background/"+to_string(indiceImage_)+".png";

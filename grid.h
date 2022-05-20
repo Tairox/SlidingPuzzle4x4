@@ -15,6 +15,7 @@ private:
     Time elapsed_; //Temps depuis le lancement de la clock
     Text chrono_;
     Text restartButton_;
+    Text backToMenuButton_;
     unsigned int seconds_; //secondes de la session d'avant (à restaurer via sauvegarde)
     unsigned int minutes_;
     int* posFree_;
