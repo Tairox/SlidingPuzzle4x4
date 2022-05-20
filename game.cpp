@@ -70,8 +70,7 @@ void Game::run()
 Game::~Game()
 {
     delete mainMenu_;
-    delete grid_;
-    //delete sender_;
+    //delete grid_;
 }
 
 void Game::checkIsInMenu()
@@ -141,4 +140,5 @@ void Game::charge()
         }
         ifs_.close();
     }
+    delete[] sender_;
 }
