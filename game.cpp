@@ -3,7 +3,7 @@
 Game::Game()
 {
     //Création de la fenêtre
-    window_.create(VideoMode(height_, width_), "Sliding Puzzle", Style::Default);
+    window_.create(VideoMode(height_, width_), "Sliding Puzzle", Style::Close);
     window_.setFramerateLimit(60);
 
     //Mise en place de l'icone
