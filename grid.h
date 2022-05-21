@@ -9,6 +9,7 @@ class Grid : public State
 private:
     Font font_;
     Font fontClock_;
+    Font fontButtons_;
     Text puzzle_[4][4];//on utilise sf::Text car si on utilise unsigned int on ne pourra pas l'afficher
     Sprite imgGrid[4][4];
     Clock clock_; //chrono

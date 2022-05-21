@@ -26,6 +26,10 @@ void Grid::init()
     {
         //error
     }
+    if(!fontButtons_.loadFromFile("font/raskhal.ttf"))
+    {
+        //error
+    }
     
     srand(time(0)); //génération de la seed pour l'aléatoire
     //Chargement de l'image de fond dans une banque d'images
@@ -104,17 +108,17 @@ void Grid::init()
     chrono_.setPosition(200,120);
     chrono_.setCharacterSize(175);
 
-    restartButton_.setFont(font_);
-    restartButton_.setFillColor(Color::White);
+    restartButton_.setFont(fontButtons_);
+    restartButton_.setFillColor(Color::Yellow);
     restartButton_.setPosition(1400,120);
-    restartButton_.setCharacterSize(175);
-    restartButton_.setString("Restart");
+    restartButton_.setCharacterSize(130);
+    restartButton_.setString("RESTART");
 
-    backToMenuButton_.setFont(font_);
-    backToMenuButton_.setFillColor(Color::White);
+    backToMenuButton_.setFont(fontButtons_);
+    backToMenuButton_.setFillColor(Color::Yellow);
     backToMenuButton_.setPosition(80,20);
     backToMenuButton_.setCharacterSize(85);
-    backToMenuButton_.setString("Back to menu");
+    backToMenuButton_.setString("BACK TO MENU");
 }
 
 void Grid::processInput()
