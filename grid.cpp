@@ -133,9 +133,20 @@ void Grid::processInput()
         {
         
         case Event::KeyPressed:
-            if(ev.key.code==Keyboard::Escape)
+            switch (ev.key.code)
             {
+            case Keyboard::Escape :
                 isExitButtonPressed_=true;
+                break;
+            
+            case Keyboard::R :
+                shuffle();
+                changeBackground();
+                clock_.restart();
+                break;
+            default:
+                //rien
+                break;
             }
             break;
 

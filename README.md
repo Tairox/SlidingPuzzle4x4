@@ -2,6 +2,8 @@
 Sliding Puzzle 4x4 using SFML library in C++
 
 ## How to play
+
+### The game
 The goal of the game is to reassamble the puzzle in this order :<br>
 | 1 | 2 | 3 | 4 |
 |---|:--:|--:|---:|
@@ -10,6 +12,11 @@ The goal of the game is to reassamble the puzzle in this order :<br>
 | 13 |  14 | 15 |  |
 
 In order to do so, you will be able to click on the tiles next to the empty one in order to make the number clicked jump into the empty space.
+
+### Shortcuts
+
+Escape : Quit the game or return in menu
+R : Restart
 
 ## How the project was coded
 
