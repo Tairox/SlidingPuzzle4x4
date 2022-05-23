@@ -144,6 +144,10 @@ void Grid::processInput()
                 changeBackground();
                 clock_.restart();
                 break;
+            
+            case Keyboard::B :
+                isExitButtonPressed_=true;
+                break;
             default:
                 //rien
                 break;

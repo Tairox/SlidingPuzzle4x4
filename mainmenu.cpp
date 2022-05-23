@@ -162,6 +162,18 @@ void MainMenu::processInput()
                     break;
                 }
                 break;
+            
+            case Keyboard::P:
+                isPlayButtonPressed_=true;
+                break;
+
+            case Keyboard::N:
+                isNewGameButtonPressed_=true;
+                break;
+
+            case Keyboard::E:
+                isExitButtonPressed_=true;
+                break;
             default: //dans les autres cas on ne fait rien
                 break;
             }

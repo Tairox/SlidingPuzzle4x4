@@ -16,6 +16,10 @@ In order to do so, you will be able to click on the tiles next to the empty one 
 ### Shortcuts
 
 Escape : Quit the game or return in menu
+B : Back to menu
+E : Exit
+N : New game
+P : Play
 R : Restart
 
 ## How the project was coded
