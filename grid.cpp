@@ -69,11 +69,12 @@ void Grid::init()
     isGridSet_=true;
     savePuzzle_ = new int [16];
 
-    if (!bufferWin_.loadFromFile("sound/Winner.wav"))
+    if (!bufferWin_.loadFromFile("sound/winner.wav"))
     {
         //Handle error
     }
     soundWin_.setBuffer(bufferWin_);
+    soundWin_.setVolume(50);
 
     // création de 5 lignes verticales |
     for (unsigned int i = 0; i < 4; i++)
@@ -125,13 +126,31 @@ void Grid::processInput()
 {
     isExitButtonPressed_=false;
     Event ev;
+    Color colorSelected(255,0,193);//couleur RGB personnalisée lorsque le curseur est sur les boutons
+    sf::Vector2i mousePosition;
+    mousePosition=sf::Mouse::getPosition(rw_);
+    if(restartButton_.getGlobalBounds().contains(rw_.mapPixelToCoords((mousePosition))))
+    {
+        restartButton_.setFillColor(colorSelected);
+    }
+    else
+    {
+        restartButton_.setFillColor(Color::Yellow);
+    }
+
+    if(backToMenuButton_.getGlobalBounds().contains(rw_.mapPixelToCoords((mousePosition))))
+    {
+        backToMenuButton_.setFillColor(colorSelected);
+    }
+    else
+    {
+        backToMenuButton_.setFillColor(Color::Yellow);
+    }
     
     while (rw_.pollEvent(ev))
     {
-        sf::Vector2i mousePosition;
         switch (ev.type)
         {
-        
         case Event::KeyPressed:
             switch (ev.key.code)
             {
@@ -203,8 +222,6 @@ void Grid::processInput()
             break;
         }
     }
-
-
 }
 
 void Grid::update()
