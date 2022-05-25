@@ -197,18 +197,22 @@ void Grid::processInput()
                 if(mousePosition.x==posFree_[1] && (mousePosition.y)+1==posFree_[0]) //case du dessous est vide
                 {
                     moveDown(mousePosition.x,mousePosition.y); //on fait baisser la case cliquée
+                    moveNotSaved_=true;
                 }
                 if(mousePosition.x==posFree_[1] && (mousePosition.y)-1==posFree_[0]) //case du dessus est vide
                 {
                     moveUp(mousePosition.x,mousePosition.y); //on fait monter la case cliquée
+                    moveNotSaved_=true;
                 }
                 if((mousePosition.x)+1==posFree_[1] && (mousePosition.y)==posFree_[0]) //case à droite vide
                 {
                     moveRight(mousePosition.x,mousePosition.y); //on fait aller à droite la case cliquée
+                    moveNotSaved_=true;
                 }
                 if((mousePosition.x)-1==posFree_[1] && (mousePosition.y)==posFree_[0]) // case à gauche vide
                 {
                     moveLeft(mousePosition.x,mousePosition.y); // case cliquée va à gauche
+                    moveNotSaved_=true;
                 }
 
                 checkIsResolved();
@@ -443,6 +447,7 @@ void Grid::shuffle()
         moveLeft(posFree_[1]+1,posFree_[0]);
         getFree();
     }
+    moveNotSaved_=true;
 }
 
 void Grid::checkIsResolved()
@@ -533,4 +538,9 @@ void Grid::changeBackground()
 		//cerr error ?
 	}
     bg_sprite_.setTexture(bg_texture_);
+}
+
+bool Grid::getMoveNotSaved()
+{
+    return moveNotSaved_;
 }

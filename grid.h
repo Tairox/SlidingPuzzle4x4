@@ -31,6 +31,7 @@ private:
     int* savePuzzle_;
 
     bool isExitButtonPressed_=false;
+    bool moveNotSaved_=false;
 
     SoundBuffer bufferWin_;
     Sound soundWin_;
@@ -53,6 +54,8 @@ public:
     void moveLeft(unsigned int x, unsigned int y);
     void moveRight(unsigned int x, unsigned int y);
     void getFree();// pour avoir la position de la case vide (case 16) int* car x et y à retourner
+    bool getMoveNotSaved();
+    void setMoveNotSavedToFalse() {moveNotSaved_=false;}
     void checkIsResolved();
     int* getPuzzle();
     void setPuzzle(int*);

@@ -91,26 +91,30 @@ void Game::checkIsInMenu()
 
 void Game::save()
 {
-    ofs_.open("save/save.txt"); //Ouverture du fichier de sauvegarde dans ofs_.
-    if(!ofs_.is_open())
+    if(grid_->getMoveNotSaved())
     {
-        cerr<<"Impossible d'ouvrir la sauvegarde"<<endl;
-    }
-    else
-    {
-        for(unsigned int i=0;i<16;i++)
+        ofs_.open("save/save.txt"); //Ouverture du fichier de sauvegarde dans ofs_.
+        if(!ofs_.is_open())
         {
-            ofs_<<grid_->getPuzzle()[i]<<endl;
-        }
-        if(!ofs_.good())
-        {
-            cerr<<"Erreur d'écriture"<<endl;
+            cerr<<"Impossible d'ouvrir la sauvegarde"<<endl;
         }
         else
         {
-            cout<<"Enregistrement réussi"<<endl;
+            for(unsigned int i=0;i<16;i++)
+            {
+                ofs_<<grid_->getPuzzle()[i]<<endl;
+            }
+            if(!ofs_.good())
+            {
+                cerr<<"Erreur d'écriture"<<endl;
+            }
+            else
+            {
+                cout<<"Enregistrement réussi"<<endl;
+            }
+            ofs_.close();
         }
-        ofs_.close();
+        grid_->setMoveNotSavedToFalse();
     }
 }
 
