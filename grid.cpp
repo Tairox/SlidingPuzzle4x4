@@ -69,7 +69,7 @@ void Grid::init()
     isGridSet_=true;
     savePuzzle_ = new int [16];
 
-    if (!bufferWin_.loadFromFile("sound/SIUU.wav"))
+    if (!bufferWin_.loadFromFile("sound/Winner.wav"))
     {
         //Handle error
     }
@@ -252,15 +252,16 @@ void Grid::draw()
         rw_.draw(bg_sprite_);// on la dessine une deuxième fois pour avoir 100% de luminosité
         Text win;
         win.setFont(font_);
-        win.setString("WINNER WINNER CHICKEN DINNER");
+        win.setString("WINNER");
         win.setCharacterSize(100);
-        win.setPosition(380,20);
+        win.setFillColor(Color::Yellow);
+        win.setPosition(825,20);
         rw_.draw(win);
         for(unsigned int j=0;j<4;j++)
         {
             for(unsigned int k=0;k<4;k++)
             {
-                puzzle_[j][k].setFillColor(Color::Green);
+                puzzle_[j][k].setFillColor(Color::Yellow);
             }
         }
     }
