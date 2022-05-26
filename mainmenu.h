@@ -50,7 +50,7 @@ public:
     void processInput() override;
     void update() override;
     void draw() override;
-    bool isInMenu();
+    bool isInMenu(); //renvoie vrai tant que nous n'avons pas appuyé sur l'un des boutons
     bool isplayPressed() {return isPlayButtonPressed_;}
     bool isNewGamePressed() {return isNewGameButtonPressed_;}
 };
