@@ -4,8 +4,10 @@
 Type : Classe dérivée de la classe abstraite 'State'.
 Rôle : Jeu de taquin :
        - Génération de grilles solubles de manière aléatoire.
+       - Détéction de l'emplacement de la case vide
        - Déplacement des cases dans la grille.
        - Détection de fin de partie.
+       - Chronomètre
 */
 
 #pragma once
@@ -34,20 +36,21 @@ private:
     int* posFree_; //position de la case vide (int* car 2 coordonnées : x et y)
     unsigned int indiceImage_; //indice de l'image tirée aléatoirement afin de faire le puzzle (utilisé afin de ne pas mettre la même image deux fois de suite)
     std::vector<RectangleShape> lines_; // lignes de la grille (à la fois horizontales et verticales)
-    //bool isInMenu_=true; pas  utile c dans game mtn il nous faut une méthode checkIsInMenu
     RenderWindow & rw_;
     unsigned int margeW_=560; //marge qu'on laisse de chaque côté de la fenêtre (ça fera donc un carré de 800x800)
-    unsigned int margeH_=140;//marge qu'on laisse en haut et en bas
+    unsigned int margeH_=140;//marge qu'on laisse en haut et en bas de la fenêtre
     bool isGridSet_=false; //vrai si la grille est remplie avec des chiffres (une sauvegarde existe) sinon faux
     bool isResolved_=false; //vrai si le taquin est résolu
     int* savePuzzle_; //permet de restaurer une partie antérieure
 
-    bool isExitButtonPressed_=false;
+    bool isExitButtonPressed_=false;//attribut donnant le signal que l'on sort de la grille pour retourner au menu
     bool moveNotSaved_=false; //vrai si un mouvement a été fait mais n'est pas encore sauvegardé (utile pour l'autosave)
 
+    //atributs de son
     SoundBuffer bufferWin_;
     Sound soundWin_;
 
+    //attributs de l'image de fond
     Texture bg_texture_;
     Sprite bg_sprite_;
 
@@ -61,16 +64,16 @@ public:
     void startClock();
     //méthodes spécifiques au puzzle_
     void shuffle();//pour mélanger le taquin (mélanger un taquin soluble fait qu'il est automatiquement soluble
-    void moveUp(unsigned int x,unsigned int y);// c'est contre-intuitif : x et y sont inversés (x en abscisse et y en ord)
-    void moveDown(unsigned int x,unsigned int y);
-    void moveLeft(unsigned int x, unsigned int y);
-    void moveRight(unsigned int x, unsigned int y);
+    void moveUp(unsigned int x,unsigned int y);//permet de bouger la case cliquée vers le haut
+    void moveDown(unsigned int x,unsigned int y);//permet de bouger la case cliquée vers le bas
+    void moveLeft(unsigned int x, unsigned int y);//permet de bouger la case cliquée vers la gauche
+    void moveRight(unsigned int x, unsigned int y);//permet de bouger la case cliquée vers la droite
     void getFree();// pour avoir la position de la case vide (case 16) int* car x et y à retourner
     bool getMoveNotSaved(); //permet de remonter l'état de l'attribut "moveNotSaved_" afin de faire la sauvegarde dans la classe "Game"
     void setMoveNotSavedToFalse() {moveNotSaved_=false;} //permet de définir l'état de l'attribut "moveNotSaved_" afin de sauvegarder dans la classe "Game" uniquement quand un mouvement est fait
     void checkIsResolved();//permet de vérifier si le taquin est résolu
     int* getPuzzle(); //permet de sauvegarder
-    void setPuzzle(int*);//permet de restaurer la sauvegarder
+    void setPuzzle(int*);//permet de restaurer la sauvegarde
     bool isInMenu();//renvoie faux tout le temps sauf si on appuie sur le boutob "Back to menu" ou son raccourci "B", permet de revenir au menu
     void changeBackground();//permet de changer l'image utilisée par le taquin
     void save(ofstream&);
