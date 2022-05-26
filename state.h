@@ -5,7 +5,7 @@ Rôle : Template permettant de créer les fenêtres de l'application à travers 
        - 'init' pour initialiser les éléments de la fenêtre.
        - 'processInput' pour gérer les actions de l'utilisateur.
        - 'update' pour mettre à jours les modifications de la fenêtre.
-       - 'draw' pour dessiner le résultat de la mise à jours.
+       - 'draw' pour dessiner le résultat de la mise à jour.
 */
 
 #ifndef __state_h__
@@ -14,14 +14,14 @@ Rôle : Template permettant de créer les fenêtres de l'application à travers 
 #include <SFML/System/Time.hpp>
 
 //Création d'une classe abstraite afin de définir les différents états du jeu.
-//Les méthodes virtuelles doivent obligatoirement être définies dans la classe fille.
+//Les méthodes virtuelles doivent obligatoirement être définies dans les classe dérivées.
 class State
 {
 public:
-    virtual void init() = 0; //Setting up the sprites, texts, positions... "'=0' veut dire que la méthode est 'pure' --> elle n'a pas de définition et doit être définie dans les classes filles"
-    virtual void processInput() = 0; //Manage key press...
-    virtual void update() = 0; //update elements...
-    virtual void draw() = 0; //Draw in the RenderWindow...
+    virtual void init() = 0;
+    virtual void processInput() = 0;
+    virtual void update() = 0;
+    virtual void draw() = 0;
 };
 
 #endif

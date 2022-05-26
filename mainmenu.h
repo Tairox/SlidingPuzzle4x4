@@ -21,26 +21,34 @@ using namespace sf;
 class MainMenu : public State
 {
 private:
+
+    //Attributs relatifs au texte du menu :
     Font font_;
     Text text_[3];
     int selectedIndex_;
     Text title_;
 	Font fontTitle_;
 	Vector2f titlePosition_;
+
+    //Vélocité du texte se déplançant dans le menu :
     float xVelocity_ = 3;
 
+    //Attributs relatifs au fond du menu :
     Texture bg_texture_;
     Sprite bg_sprite_;
 
+    //Booléens pour l'état du menu :
     bool isExitButtonPressed_ = false;
     bool isPlayButtonPressed_ = false;;
     bool isNewGameButtonPressed_ = false;
 
+    //Attributs relatifs aux sons dans le menu :
     SoundBuffer bufferSelect_;
     Sound soundSelect_;
     SoundBuffer bufferEnter_;
     Sound soundEnter_;
 
+    //Fenêtre de l'application passée par la classe "Game" :
     RenderWindow & rw_;
 
 public:
