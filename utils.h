@@ -1,6 +1,6 @@
 /*------Auteur : Anthony De Sousa
         Date de dernière modification : 26.05.2022.
-Type : Simple classe d'utilitaires sans relations particulières avec les autres classes.
+Type : Simple fonction utilisable dans les classes de l'application.
 Rôle : Génère un nombre aléatoire dans un intervalle donné.
 */
 
