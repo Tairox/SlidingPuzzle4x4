@@ -1,3 +1,13 @@
+/*------Auteur : Mattéo FIRRONE
+        Contributeurs : Mattéo FIRRONE & Anthony De Sousa
+        Date de dernière modification : 26.05.2022.
+Type : Classe dérivée de la classe abstraite 'State'.
+Rôle : Menu principale du jeu, la navigation permet à l'utilisateur de :
+       - Choisir de jouer 'Play' avec la sauvegarde actuelle.
+       - Lancer une nouvelle partie 'New Game'.
+       - Quitter le jeu 'Exit'.
+*/
+
 #ifndef __mainmenu_h__
 #define __mainmenu_h__
 

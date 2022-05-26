@@ -23,7 +23,7 @@ Game::Game()
     {
         //Handle error
     }
-    music_.setVolume(50);
+    music_.setVolume(100);
     music_.setLoop(true);
     music_.play();
 
@@ -70,7 +70,7 @@ void Game::run()
 Game::~Game()
 {
     delete mainMenu_;
-    //delete grid_;
+    delete grid_;
 }
 
 void Game::checkIsInMenu()
@@ -78,9 +78,9 @@ void Game::checkIsInMenu()
     if(isInMenu_)
     {
         isInMenu_=mainMenu_->isInMenu();
-        if(!isInMenu_)//si on sort du menu
+        if(!isInMenu_)//Si l'utilisateur est sortit du menu
         {
-            grid_->startClock();//on met la clock à 0
+            grid_->startClock();//L'horloge est mise à 0
         }
     }
     else
@@ -100,10 +100,7 @@ void Game::save()
         }
         else
         {
-            for(unsigned int i=0;i<16;i++)
-            {
-                ofs_<<grid_->getPuzzle()[i]<<endl;
-            }
+            grid_->save(ofs_);
             if(!ofs_.good())
             {
                 cerr<<"Erreur d'écriture"<<endl;
@@ -120,8 +117,6 @@ void Game::save()
 
 void Game::charge()
 {
-    sender_ = new int[16];
-
     ifs_.open("save/save.txt");
     if(!ifs_.is_open())
     {
@@ -129,10 +124,7 @@ void Game::charge()
     }
     else
     {
-        for(unsigned int i=0;i<16;i++)
-        {
-            ifs_>>sender_[i];
-        }
+        grid_->charge(ifs_);
         if(!ifs_.good())
         {
             cerr<<"Erreur de lecture"<<endl;
@@ -140,9 +132,7 @@ void Game::charge()
         else
         {
             cout<<"Lecture terminée"<<endl;
-            grid_->setPuzzle(sender_);
         }
         ifs_.close();
     }
-    delete[] sender_;
 }

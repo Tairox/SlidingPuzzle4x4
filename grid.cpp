@@ -544,3 +544,22 @@ bool Grid::getMoveNotSaved()
 {
     return moveNotSaved_;
 }
+
+void Grid::save(ofstream& ofs)
+{
+    for(unsigned int i=0;i<16;i++)
+    {
+        ofs<<getPuzzle()[i]<<endl;
+    }
+}
+
+void Grid::charge(ifstream& ifs)
+{
+    int* sender = new int[16];
+    for(unsigned int i=0;i<16;i++)
+    {
+        ifs>>sender[i];
+    }
+    setPuzzle(sender);
+    delete[] sender;
+}

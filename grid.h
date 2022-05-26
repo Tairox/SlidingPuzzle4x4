@@ -1,8 +1,20 @@
+/*------Auteur : Anthony De Sousa
+        Contributeurs : Anthony De Sousa & Mattéo Firrone
+        Date de dernière modification : 26.05.2022.
+Type : Classe dérivée de la classe abstraite 'State'.
+Rôle : Jeu de taquin :
+       - Génération de grilles solubles de manière aléatoire.
+       - Déplacement des cases dans la grille.
+       - Détection de fin de partie.
+*/
+
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "state.h"
 using namespace sf;
+#include <fstream>
+using namespace std;
 
 class Grid : public State
 {
@@ -61,4 +73,6 @@ public:
     void setPuzzle(int*);
     bool isInMenu();
     void changeBackground();
+    void save(ofstream&);
+    void charge (ifstream &);
     };

@@ -35,10 +35,10 @@ void MainMenu::init()
 
     if (!fontTitle_.loadFromFile("font/SFAlienEncounters-Italic.ttf"))
 	{
-		// handle error
+		//Handle error
 	}
 	title_.setFont(fontTitle_);
-    sf::Color colorTitle(5,128,247);//couleur RGB
+    sf::Color colorTitle(5,128,247);//Couleur RGB
 	title_.setFillColor(colorTitle);
 	title_.setString("Sliding Puzzle");
 	title_.setCharacterSize(150);
@@ -103,7 +103,7 @@ void MainMenu::processInput()
     {
         switch (ev.type)
         {
-        case Event::MouseButtonPressed: //clic gauche
+        case Event::MouseButtonPressed:
             switch (selectedIndex_)
                 {
                 case 0:
@@ -118,7 +118,7 @@ void MainMenu::processInput()
                     isExitButtonPressed_ = true;
                     soundEnter_.play();
                     break;
-                default: //dans les autres cas on ne fait rien
+                default: //Dans les autres cas on ne fait rien
                     break;
                 }
             break;
@@ -158,7 +158,7 @@ void MainMenu::processInput()
                     isExitButtonPressed_ = true;
                     soundEnter_.play();
                     break;
-                default: //dans les autres cas on ne fait rien
+                default: //Dans les autres cas on ne fait rien
                     break;
                 }
                 break;
@@ -174,7 +174,7 @@ void MainMenu::processInput()
             case Keyboard::E:
                 isExitButtonPressed_=true;
                 break;
-            default: //dans les autres cas on ne fait rien
+            default: //Dans les autres cas on ne fait rien
                 break;
             }
             break;
@@ -183,7 +183,7 @@ void MainMenu::processInput()
             rw_.close();
             break;
 
-        default: //dans les autres cas on ne fait rien
+        default: //Dans les autres cas on ne fait rien
             break;
         }
     }
@@ -191,17 +191,15 @@ void MainMenu::processInput()
 
 void MainMenu::update()
 {
-    sf::Color colorMenuSelected(255,0,193);//couleur RGB
+    sf::Color colorMenuSelected(255,0,193);//Couleur RGB
     for(unsigned int i = 0;i<3;i++)
     {
         text_[i].setFillColor(Color::White);
-		//text_[i].setCharacterSize(100);
 		text_[i].setStyle(Text::Regular);
         text_[i].setFont(font_);
     }
     text_[selectedIndex_].setFillColor(colorMenuSelected);
     text_[selectedIndex_].setFont(fontTitle_);
-	//text_[selectedIndex_].setCharacterSize(150);
 	text_[selectedIndex_].setStyle(sf::Text::Bold | sf::Text::Underlined);
 
     //Physics
@@ -220,7 +218,7 @@ void MainMenu::update()
 
     if(isNewGameButtonPressed_)
     {
-        //rien
+        //On ne fait rien
     }
 }
 
