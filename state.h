@@ -1,3 +1,13 @@
+/*------Auteur : Mattéo FIRRONE
+        Date de dernière modification : 26.05.2022.
+Type : Classe abstraite.
+Rôle : Template permettant de créer les fenêtres de l'application à travers les méthodes suivantes :
+       - 'init' pour initialiser les éléments de la fenêtre.
+       - 'processInput' pour gérer les actions de l'utilisateur.
+       - 'update' pour mettre à jours les modifications de la fenêtre.
+       - 'draw' pour dessiner le résultat de la mise à jours.
+*/
+
 #ifndef __state_h__
 #define __state_h__
 
