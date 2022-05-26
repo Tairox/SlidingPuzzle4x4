@@ -56,7 +56,7 @@ void Grid::init()
         puzzle_[j][k].setFont(font_); // on définit la police de tout les éléments
         puzzle_[j][k].setCharacterSize(150);
         //on définit la position de chaque élément de la grille
-        puzzle_[j][k].setPosition(560+gap/4+gap*k,140+gap*j);
+        puzzle_[j][k].setPosition(margeW_+gap/4+gap*k,margeH_+gap*j);
         i++;
       }
    }
