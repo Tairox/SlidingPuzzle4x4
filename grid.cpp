@@ -69,7 +69,7 @@ void Grid::init()
     isGridSet_=true;
     savePuzzle_ = new int [16];
 
-    if (!bufferWin_.loadFromFile("sound/winner.wav"))
+    if (!bufferWin_.loadFromFile("sound/winner.ogg"))
     {
         //Handle error
     }
@@ -293,6 +293,10 @@ void Grid::draw()
             for(unsigned int k=0;k<4;k++)
             {
                 puzzle_[j][k].setFillColor(Color::White);
+                if(puzzle_[j][k].getString()!="16") //si c'est 16 alors c'est la case vide donc on ne l'affiche pas
+                {
+                    rw_.draw(imgGrid[j][k]);
+                }
             }
         }
     }
@@ -308,7 +312,6 @@ void Grid::draw()
         {
             if(puzzle_[j][k].getString()!="16") //si c'est 16 alors c'est la case vide donc on ne l'affiche pas
             {
-                rw_.draw(imgGrid[j][k]);
                 rw_.draw(puzzle_[j][k]);
             }
         }

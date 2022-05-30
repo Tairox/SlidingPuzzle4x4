@@ -46,19 +46,19 @@ void MainMenu::init()
     titlePosition_.y = 0;
 	title_.setPosition(titlePosition_);
 
-    if(!bg_texture_.loadFromFile("img/background.png"))
+    if(!bg_texture_.loadFromFile("img/background.jpg"))
 	{
 		//Handle error
 	}
     bg_sprite_.setTexture(bg_texture_);
 
-    if (!bufferSelect_.loadFromFile("sound/select_menu.wav"))
+    if (!bufferSelect_.loadFromFile("sound/select_menu.ogg"))
     {
         //Handle error
     }
     soundSelect_.setBuffer(bufferSelect_);
 
-    if (!bufferEnter_.loadFromFile("sound/enter_menu.wav"))
+    if (!bufferEnter_.loadFromFile("sound/enter_menu.ogg"))
     {
         //Handle error
     }
