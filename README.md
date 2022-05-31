@@ -26,7 +26,7 @@ R : Restart
 
 ### Language
 The project was coded using the SFML library and using __C++20__ syntax and operators.<br>
-In order to compile these files you will need to donwload a C++ compiler and the SFML libraries.
+In order to compile these files you will need to download a C++ compiler and the SFML libraries.
 
 ### Dependencies
 We used a static version of the SFML library which means that we don't include any DLL files in this project apart from "*openal32.dll*".<br>
