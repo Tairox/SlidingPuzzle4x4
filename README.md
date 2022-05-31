@@ -39,4 +39,4 @@ Mac/Linux :<br>
 
 
 Windows :<br>
-`-L<libFolderOfSFML> -lsfml-graphics-s -lsfml-window-s -lsfml-audio-s -lsfml-system-s -lopengl32 -lfreetype  -lwinmm -lgdi32 -mwindows -lsfml-main -lopenal32 -lflac -lvorbisenc -lvorbisfile -lvorbis -logg`
+`-L<libFolderOfSFML> -lsfml-graphics-s -lsfml-window-s -lsfml-audio-s -lsfml-system-s -lopengl32 -lfreetype  -lwinmm -lgdi32 -mwindows -lsfml-main -lopenal32 -lflac -lvorbisenc -lvorbisfile -lvorbis -logg -static -static-libstdc++ -static-libgcc`
