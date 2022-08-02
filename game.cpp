@@ -4,7 +4,7 @@ Game::Game()
 {
     //Création de la fenêtre
     window_.create(VideoMode(height_, width_), "Sliding Puzzle", Style::Close);
-    window_.setFramerateLimit(60);
+    window_.setFramerateLimit(60);//60 FPS pour pouvoir prévoir et gérer la physique du jeu
 
     //Mise en place de l'icone
     Image icon;
